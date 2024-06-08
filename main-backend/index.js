@@ -1,15 +1,26 @@
-const express = require('express')
-const app = express()
-const PORT = 5000
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
+import route from "./routes/queRoute.js";
+import cors from "cors";
 
-app.get( '/',(req,res) =>{
-    return res.send('Hello welcom =e to node js with express')
-})
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+dotenv.config();
 
-app.listen(PORT,(err)=>{
-    if(err){
-        console.log(err)
-    }
-    console.log('SERVER STARTED')
-}
-)
+const PORT = process.env.PORT || 7000;
+const MONGOURL = process.env.MONGO_URL;
+
+mongoose
+    .connect(MONGOURL)
+    .then(()=>{
+        console.log("DB connected successfully.")
+        app.listen(PORT,()=>{
+                console.log(`Server is running on port :${PORT}`);
+        });
+    })
+    .catch((error)=> console.log(error));
+
+app.use("/api", route);
