@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import route from "./routes/queRoute.js";
+import complaintRoute from './routes/complaintRoute.js'
 import cors from "cors";
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json({ extended: false }));
 app.use(cors());
 dotenv.config();
 
@@ -24,3 +25,4 @@ mongoose
     .catch((error)=> console.log(error));
 
 app.use("/api", route);
+app.use("/api", complaintRoute);
