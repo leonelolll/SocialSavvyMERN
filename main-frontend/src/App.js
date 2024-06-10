@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 import FAQ from "./faq/faq.js"
 import Helpdesk from "./helpdesk/Helpdesk.js"
+import Feedback from "./feedback/feedback.js"
 
 import React from 'react'
 import Landing from './landing/Landing.jsx'
@@ -14,23 +14,6 @@ import { Routes, Route} from 'react-router-dom'
 
 
 function App() {  
-=======
-import './App.css';
-//import FAQ from "./faq/faq.js"
-//import Helpdesk from "./Helpdesk/Helpdesk.js"
-import Feedback from "./feedback/feedback.js"
-import {RouterProvider, createBrowserRouter} from "react-router-dom"
-
-
-function App() {
-  const route = createBrowserRouter([
-    {
-      path:"/",
-      element:<Feedback />
-    },
-  ]);
-  
->>>>>>> f726376b81dbc6f74b48ab90f1495bd26517d5c0
   return (
     <Routes>
       <Route path='/' element = {<Landing/>}/>
@@ -48,6 +31,7 @@ function App() {
       />
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/helpdesk' element = {<Helpdesk/>}/>
+      <Route path='/feedback' element = {<Helpdesk/>}/>
     </Routes>
   );
 }
