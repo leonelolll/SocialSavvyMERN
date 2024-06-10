@@ -1,5 +1,4 @@
 import express from "express";
-
 import { createComplaint, getAllComplaints, getComplaintById, deleteComplaint } from '../controller/complaintController.js'
 
 const route = express.Router();
