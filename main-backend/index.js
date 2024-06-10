@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import route from "./routes/queRoute.js";
 import complaintRoute from './routes/complaintRoute.js'
+import feedbackRoute from './routes/feedbackRoute.js';
 import cors from "cors";
 
 import userRoutes from "./routes/user.route.js"
@@ -13,6 +14,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
+app.use(bodyParser.json());
 app.use(express.json({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
@@ -36,6 +38,7 @@ mongoose
 
 app.use("/api", route);
 app.use("/api", complaintRoute);
+app.use("/api", feedbackRoute);
 
 app.use("/main-backend/user", userRoutes);
 app.use("/main-backend/auth", authRoutes);

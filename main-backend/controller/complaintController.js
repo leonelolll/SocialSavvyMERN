@@ -2,14 +2,9 @@ import Complaint from "../model/complaintModel.js";
 
 export const createComplaint = async(req, res) =>{
     try {
-        // Generate current date in YYYY-MM-DD format
         const date = new Date().toISOString().split('T')[0];
-
-        // Generate a unique ticket number
         const lastComplaint = await Complaint.findOne().sort({ ticketNo: -1 });
         const ticketNo = lastComplaint ? lastComplaint.ticketNo + 1 : 101;
-        
-        // Create a new complaint with the generated date and ticket number
         const newComplaint = new Complaint({
             ...req.body,
             date,
@@ -26,7 +21,7 @@ export const createComplaint = async(req, res) =>{
         res.status(200).json({message:"Complaint created successfully!"});
 
     } catch (error) {
-        console.error('Error creating complaint:', error); // Log the error stack trace
+        console.error('Error creating complaint:', error);
         res.status(500).json({ errorMessage: error.message });
     }
 };
