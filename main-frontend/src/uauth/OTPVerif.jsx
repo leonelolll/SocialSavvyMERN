@@ -79,14 +79,14 @@ function OTPVerif() {
                         </div>
                     </section>
                     <div className="input-container number">
-                        <input 
-                            id="number" 
+                        <input
+                            id="number"
                             type="number"
-                            name="number"  
+                            name="number"
                             value={otp}
-                            placeholder="OTP" 
+                            placeholder="OTP"
                             onChange={handleOnChange}
-                            />
+                        />
                     </div>
                     <button className="signup-btn" type="submit">submit</button>
                 </form>

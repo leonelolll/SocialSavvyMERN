@@ -5,7 +5,7 @@ import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSli
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
-import "./style1.css"
+import s from "./uauth.module.css";
 import { app } from "../firebase.js";
 // import logo from "../../assets/images/socialsavvy-logo.png"
 
@@ -74,11 +74,11 @@ function Register() {
     }
 
     return (
-        <div className="split-screen">
-            <div className="left">
-                <section className="copy">
-                    <div className="logo">
-                        <img src="../../../public/assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+        <div className={s.split_screen}>
+            <div className={s.left}>
+                <section className={s.copy}>
+                    <div className={s.logo}>
+                        <img src="../../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
                     </div>
                     <h1>Create and manage your marketing contents better and easier.</h1>
                     <svg width="203" height="1">
@@ -87,14 +87,14 @@ function Register() {
                     <p><i> Streamline Content, Amplify Impact</i></p>
                 </section>
             </div>
-            <div className="right">
+            <div className={s.right}>
                 <form onSubmit={handleSubmit}>
-                    <section className="copy">
+                    <section className={s.copy}>
                         <h2>Create your account</h2>
-                        <div className="signup-container">
+                        <div className={s.signup_container}>
                             <p>Already have an account? <Link to="/login"><strong>Log in</strong></Link></p>
                         </div>
-                        <button type="button" onClick={handleGoogleClick} className="signup-w-google-btn">
+                        <button type="button" onClick={handleGoogleClick} className={s.signup_w_google_btn}>
                             Sign up with Google
                         </button>
                         <div>
@@ -108,11 +108,11 @@ function Register() {
                         </div>
                     </section>
                     <br />
-                    {/* <div className="input-container name">
+                    {/* <div className="input_container name">
                         <input id="fname" name="fname" type="text" placeholder="First name" />
                         <input id="lname" name="lname" type="text" placeholder="Last name" />
                     </div> */}
-                    <div className="input-container email">
+                    <div className={s.input_container.email}>
                         <input
                             id="email"
                             type="email"
@@ -121,7 +121,7 @@ function Register() {
                             onChange={handleOnChange}
                         />
                     </div>
-                    <div className="input-container password">
+                    <div className={s.input_container.password}>
                         <input
                             id="password"
                             type="password"
@@ -131,7 +131,7 @@ function Register() {
                         />
                         <i className="far fa-eye-slash"></i>
                     </div>
-                    <div className="input-container password">
+                    <div className={s.input_container.password}>
                         <input
                             id="cpassword"
                             type="password"
@@ -141,14 +141,14 @@ function Register() {
                         />
                         <i className="far fa-eye-slash"></i>
                     </div>
-                    <p className="errorMsg">{error ? error || "Something went wrong!" : ""}</p>
-                    <button disabled={loading} className="signup-btn" type="submit">
+                    <p className={s.errorMsg}>{error ? error.message || "Something went wrong!" : ""}</p>
+                    <button disabled={loading} className={s.signup_btn} type="submit">
                         {loading ? "Loading..." : "Sign Up"}
                     </button>
-                    <div className="input-container cta">
-                        <label className="checkbox-container">
-                            <input type="checkbox" />
-                            <span className="r-checkmark"></span>
+                    <div className={s.input_container.cta}>
+                        <label className={s.checkbox_container}>
+                            <input type={s.checkbox} />
+                            <span className={s.r_checkmark}></span>
                             <p><small>By creating an account, I agree to accept SocialSavvy's
                                 <Link to="https://docs.google.com/document/d/1KazYjy9XokNkQurNVBNj1duowDUW72UF6RFD8bKt5W0/edit?usp=sharing"> Privacy Policy </Link>
                                 and <Link to="https://docs.google.com/document/d/1RDBvwhP1bWuuPkI6fRsvOu6x872QvEK9uY75jLUjmUw/edit?usp=sharing">Terms of Service</Link>.</small></p>

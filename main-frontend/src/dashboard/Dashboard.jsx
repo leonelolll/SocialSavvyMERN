@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
-// import "./dashboard.css";
+import s from "./dashboard.module.css";
 
 
 function Dashboard() {
@@ -56,127 +56,126 @@ function Dashboard() {
   };
 
   return (
-    <div className="header">
-      <div className="user-greetings">
+    <div className={s.header}>
+      <div className={s.user_greetings}>
         <h1>Hi, user!</h1>
       </div>
 
-      <div className="link-soc-med">
-        <div className="link-content">
-          <div className="link-title">
+      <div className={s.link_soc_med}>
+        <div className={s.link_content}>
+          <div className={s.link_title}>
             <p>Manage linked social media</p>
           </div>
-          <div className="link-description">
+          <div className={s.link_description}>
             <p>Connect your social media accounts to seamlessly share your content across platforms with
-              just a
-              click!</p>
+              just a click!</p>
           </div>
-          <button className="link-btn" id="manage-btn">Manage</button>
+          <button className={s.link_btn} id="manage-btn" >Manage</button>
         </div>
-        <div className="right-column">
+        <div className={s.right_column}>
           <p>Platforms connected:</p>
-          <div className="soc-med-container">
-            <div className="soc-med-icons">
+          <div className={s.soc_med_container}>
+            <div className={s.soc_med_icons}>
               <img src="../../assets/images/linkedin-logo.png" alt="LinkedIn logo" />
             </div>
-            <div className="soc-med-icons">
+            <div className={s.soc_med_icons}>
               <img src="../../assets/images/instagram-logo.png" alt="Instagram logo" />
             </div>
-            <div className="soc-med-icons">
+            <div className={s.soc_med_icons}>
               <img src="../../assets/images/facebook-logo.jpeg" alt="Facebook logo" />
             </div>
-            <div className="soc-med-icons">
+            <div className={s.soc_med_icons}>
               <img src="../../assets/images/tiktok-logo.jpg" alt="TikTok logo" />
             </div>
           </div>
         </div>
       </div>
 
-      <div className="subscription-plan">
-        <div className="payment-content">
-          <div className="payment-title">
+      <div className={s.subscription_plan}>
+        <div className={s.payment_content}>
+          <div className={s.payment_title}>
             <p>Your current subscription plan</p>
           </div>
-          <div className="payment-plan">
+          <div className={s.payment_plan}>
             <h2>Premium</h2>
           </div>
-          <div className="payment-description">
+          <div className={s.payment_description}>
             <p>Your next bill is for RM 29.99 on 23/04/2024</p>
           </div>
-          <button className="payment-btn">Pay now</button>
+          <button className={s.payment_btn}>Pay now</button>
         </div>
       </div>
 
-      <div className="analytics-box">
-        <div className="analytics-box-title">
+      <div className={s.analytics_box}>
+        <div className={s.analytics_box_title}>
           <p>Engagement Analytics</p>
         </div>
-        <div className="analytics-content">
-          <div className="pattern" id="pattern1">
+        <div className={s.analytics_content}>
+          <div className={s.pattern} id="pattern1">
             <h3>Content Performance Analysis</h3>
             <canvas id="Chart1"></canvas>
           </div>
         </div>
-        <div className="right-column">
-          <div className="pattern" id="pattern2">
+        <div className={s.right_column}>
+          <div className={s.pattern} id="pattern2">
             <h3>Click-Through Rate Analysis</h3>
             <canvas id="Chart2"></canvas>
           </div>
+        </div >
+    <button className={s.analytics_btn}>View more</button>
+      </div >
+
+    <div className={s.scheduled_postings}>
+      <div className={s.scheduled_content}>
+        <div className={s.scheduled_title}>
+          <p>Scheduled Postings</p>
         </div>
-        <button className="analytics-btn">View more</button>
-      </div>
-
-      <div className="scheduled-postings">
-        <div className="scheduled-content">
-          <div className="scheduled-title">
-            <p>Scheduled Postings</p>
+        <div className={s.tab_container}>
+          <div className={s.tab_box}>
+            <button className={s.tab_button} active>Today</button>
+          <button className={s.tab_button}>Week</button>
+          <button className={s.tab_button}>Month</button>
+          <div className={s.line}></div>
+        </div>
+        <div className={s.content_box}>
+          <div className={s.tab_content} active>
+          <h3>Today</h3>
+          <div className={s.tab1_notice}>
+            <p>There are no scheduled contents for today!</p>
           </div>
-          <div className="tab-container">
-            <div className="tab-box">
-              <button className="tab-button active">Today</button>
-              <button className="tab-button">Week</button>
-              <button className="tab-button">Month</button>
-              <div className="line"></div>
-            </div>
-            <div className="content-box">
-              <div className="tab-content active">
-                <h3>Today</h3>
-                <div className="tab1-notice">
-                  <p>There are no scheduled contents for today!</p>
-                </div>
-              </div>
+        </div>
 
-              <div className="tab-content">
-                <h3>Week</h3>
-                <div className="tab1-notice">
-                  <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
-                  <p><small>Scheduled on 26th April 2024</small></p>
-                  <p><small><i>Platform: Instagram, Facebook</i></small></p>
-                </div>
-              </div>
+        <div className={s.tab_content}>
+          <h3>Week</h3>
+          <div className={s.tab1_notice}>
+            <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
+            <p><small>Scheduled on 26th April 2024</small></p>
+            <p><small><i>Platform: Instagram, Facebook</i></small></p>
+          </div>
+        </div>
 
-              <div className="tab-content">
-                <h3>Month</h3>
-                <div className="tab1-notice">
-                  <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
-                  <p><small>Scheduled on 26th April 2024</small></p>
-                  <p><small><i>Platform: Instagram, Facebook</i></small></p>
-                </div>
-              </div>
-            </div>
+        <div className={s.tab_content}>
+          <h3>Month</h3>
+          <div className={s.tab1_notice}>
+            <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
+            <p><small>Scheduled on 26th April 2024</small></p>
+            <p><small><i>Platform: Instagram, Facebook</i></small></p>
           </div>
         </div>
       </div>
+    </div>
+        </div >
+      </div >
 
-      <div className="my-posts">
-        <div className="posts-content">
-          <div className="posts-title">
+      <div className={s.my_posts}>
+        <div className={s.posts_content}>
+          <div className={s.posts_title}>
             <p>My Posts</p>
           </div>
         </div>
       </div>
       <ToastContainer />
-    </div>
+    </div >
   );
 };
 

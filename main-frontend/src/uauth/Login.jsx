@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
-import "./style1.css"
+import s from "./uauth.module.css";
 // import logo from "../../assets/images/socialsavvy-logo.png"
 
 function Login() {
@@ -48,11 +48,11 @@ function Login() {
   };
 
   return (
-    <div className="split-screen">
-      <div className="left">
-        <section className="copy">
-          <div className="logo">
-            <img src="../../../public/assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+    <div className={s.split_screen}>
+      <div className={s.left}>
+        <section className={s.copy}>
+          <div className={s.logo}>
+          <img src="../../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
           </div>
           <h1>Simplify, Create,<br />Join Us!</h1>
           <svg width="203" height="1">
@@ -61,15 +61,15 @@ function Login() {
           <p><i> Streamline Content, Amplify Impact</i></p>
         </section>
       </div>
-      <div className="right">
+      <div className={s.right}>
         <form onSubmit={handleSubmit}>
-          <section className="copy">
+          <section className={s.copy}>
             <h2>Welcome Back!</h2>
-            <div className="login-container">
+            <div className={s.login_container}>
               Log into your account
             </div>
           </section>
-          <div className="input-container email">
+          <div className={s.input_container.email}>
             <input
               id="email"
               type="email"
@@ -78,7 +78,7 @@ function Login() {
               onChange={handleOnChange}
             />
           </div>
-          <div className="input-container password">
+          <div className={s.input_container.password}>
             <input
               id="password"
               type="password"
@@ -88,24 +88,24 @@ function Login() {
             />
             <i className="far fa-eye-slash"></i>
           </div>
-          <p className="errorMsg">{error && "Something went wrong!"}</p>
-          <button disabled={loading} className="signup-btn" type="submit">
+          <p className={s.errorMsg}>{error && "Something went wrong!"}</p>
+          <button disabled={loading} className={s.signup_btn} type="submit">
             {loading ? "Loading..." : "Log In"}
           </button>
-          <div className="input-container cta">
-            <label className="checkbox-container">
-              <input type="checkbox" />
-              <span className="l-checkmark"></span>
+          <div className={s.input_container.cta}>
+            <label className={s.checkbox_container}>
+              <input type={s.checkbox}/>
+              <span className={s.l_checkmark}></span>
               <small>Remember me</small>
             </label>
-            <div className="forgot-password">
+            <div className={s.forgot_password}>
               <p><small><Link to="/forgetpass">Forgot password?</Link></small></p>
             </div>
           </div>
-          <button className="signup-w-google-btn">
+          <button className={s.signup_w_google_btn}>
             <Link to="/dashboard">Sign in with Google</Link>
           </button>
-          <div className="register-prompt">
+          <div className={s.register_prompt}>
             <p>Don't have an account? <Link to="/register">Register here</Link></p>
           </div>
         </form>

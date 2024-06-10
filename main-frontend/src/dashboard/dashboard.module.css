@@ -263,7 +263,7 @@
 
 
 
-  .user-greetings {
+  .user_greetings {
     width: calc(100% - 150px);
     height: 510px;
     border-radius: 19px;
@@ -274,7 +274,7 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  .link-soc-med{
+  ._soc-med{
     width: 800px;
     height: auto;
     background-color: white;
@@ -288,28 +288,28 @@
     gap: 80px;
   }
 
-  .link-soc-med .link-content{
+  .link_soc_med .link_content{
     grid-column: 1 / span 1;
     display: flex;
     flex-direction: column;
   }
 
-  .link-soc-med .right-column{
+  .link_soc_med .right_column{
     grid-column: 2 / span 1;
   }
 
-  .link-soc-med .link-title{
+  .link_soc_med .link_title{
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 1em;
   }
 
-  .link-soc-med .link-description{
+  .link_soc_med .link_description{
     font-size: 0.85em;
     margin-bottom: 15px;
   }
 
-  .link-btn{
+  .link_btn{
     width: 30%;
     background: var(--purple-1);
     color: white;
@@ -322,17 +322,17 @@
     align-self: flex-end;
   }
 
-  .right-column p{
+  .right_column p{
     font-weight: 600;
     font-size: 1em;
     margin-bottom: 15px;
   }
 
-  .soc-med-container{
+  .soc_med_container{
     display: flex;
   }
 
-  .soc-med-container .soc-med-icons{
+  .soc_med_container .soc_med_icons{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -342,17 +342,17 @@
     cursor: pointer;
   }
 
-  .soc-med-container .soc-med-icons img{
+  .soc_med_container .soc_med_icons img{
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .soc-med-container .soc-med-icons:hover{
+  .soc_med_container .soc_med_icons:hover{
     animation: float 0.5s ease-in-out infinite alternate;
   }
 
-  .subscription-plan{
+  .subscription_plan{
     width: 400px;
     height: auto;
     background-color: white;
@@ -363,22 +363,22 @@
     padding: 1.35em;
   }
 
-  .subscription-plan .payment-content{
+  .subscription_plan .payment_content{
     grid-column: 1 / span 1;
     display: flex;
     flex-direction: column;
   }
 
-  .payment-content .payment-title{
+  .payment_content .payment_title{
     font-weight: 600;
     margin-bottom: 5px;
     font-size: 1em;
   }
-  .payment-plan{
+  .payment_plan{
     font-size: 0.85rem;
   }
 
-  .payment-btn{
+  .payment_btn{
     width: 30%;
     background: #F3EAFF;
     color: black;
@@ -392,11 +392,11 @@
     margin-top: 15px;
   }
 
-  .payment-content .payment-description{
+  .payment_content .payment_description{
     font-size: 0.85em;
   }
 
-  .analytics-box{
+  .analytics_box{
     width: 800px;
     height: auto;
     background-color: white;
@@ -413,11 +413,11 @@
     justify-content: center;
   }
 
-  .analytics-box .analytics-content{
+  .analytics_box .analytics_content{
     grid-column: 1 / span 1;
   }
 
-  .analytics-box .right-column{
+  .analytics_box .right_column{
     grid-column: 2 / span 1;
   }
 
@@ -426,13 +426,13 @@
     font-size: 1rem;
     margin-bottom: 20px;
   }
-  .analytics-box-title{
+  .analytics_box_title{
     margin-bottom: -20px;
     font-weight: 600;
     grid-column: 1 / span 2;
     text-align: center;
   }
-  .analytics-btn{
+  .analytics_btn{
     width: 20%;
     background: var(--purple-1);
     color: white;
@@ -448,7 +448,7 @@
     margin-bottom: 0px;
   }
 
-  .scheduled-postings{
+  .scheduled_postings{
     width: 400px;
     height: 400px;
     background-color: white;
@@ -459,13 +459,13 @@
     padding: 1.35em;
   }
 
-  .scheduled-postings .scheduled-title{
+  .scheduled_postings .scheduled_title{
     margin-bottom: -20px;
     font-weight: 600;
     text-align: center;
   }
 
-  .tab-container{
+  .tab_container{
     width: 350px;
     height: auto;
     background-color: #ffffff;
@@ -486,7 +486,7 @@
     position: relative;
   }
 
-  .tab-box .tab-button{
+  .tab_box .tab_button{
     font-size: 13px;
     font-weight: 600;
     color: #919191;
@@ -496,7 +496,7 @@
     cursor: pointer;
   }
 
-  .tab-box .tab-button.active{
+  .tab_box .tab_button.active{
     color: #845CFC;
   }
 
@@ -510,11 +510,11 @@
     border-radius: 10px;
     transition: all .3s ease-in-out;
   }
-  .content-box{
+  .content_box{
     padding: 20px;
   }
 
-  .content-box .tab-content{
+  .content_box .tab_content{
     display: none;
     animation: moving .5s ease;
   }
@@ -524,30 +524,30 @@
     to{transform: translateX(0px);opacity: 1;}
   }
 
-  .content-box .tab-content.active{
+  .content_box .tab_content.active{
     display: block;
   }
 
-  .content-box .content h3{
+  .content_box .content h3{
     margin-bottom: 10px;
   }
 
-.schedule-container{
+.schedule_container{
   width: 80%;
   height: auto;
   background-color: #F3EBFF;
 }
 
-.tab-content {
+.tab_content {
     display: none;
     padding: 0 10px 50px 10px;
 }
 
-.tab-content.active {
+.tab_content.active {
     display: block;
 }
 
-.tab1-notice{
+.tab1_notice{
   width: fit-content;
   height: auto;
   background-color: transparent;
@@ -559,7 +559,7 @@
   font-size: 0.885rem;
 }
 
-  .my-posts{
+  .my_posts{
     width: 800px;
     height: 300px;
     background-color: white;
@@ -571,7 +571,7 @@
     visibility: hidden;
   }
 
-  .posts-title{
+  .posts_title{
     margin-bottom: -20px;
     font-weight: 600;
     text-align: center;
@@ -584,7 +584,7 @@ footer{
   
 }
 
-.footer-end{
+.footer_end{
   width: 800px;
   margin: 0 auto;
   

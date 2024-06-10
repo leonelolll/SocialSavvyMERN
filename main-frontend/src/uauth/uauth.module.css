@@ -42,7 +42,7 @@ a:hover{
     text-align: center;
 }
 
-.split-screen{
+.split_screen{
     display: flex;
     flex-direction: column;
 }
@@ -93,11 +93,11 @@ a:hover{
     width: 328px;
 }
 
-.signup-container{
+.signup_container{
     margin-top: -5px;
 }
 
-.login-container{
+.login_container{
     margin-bottom: 20px;
     margin-top: -5px;
 }
@@ -114,25 +114,25 @@ form input[type="number"] {
     font-size: 0.875rem;
 }
 
-/* .input-container.name{
+/* .input_container.name{
     display: flex;
 }
 
-.input-container.name input{
+.input_container.name input{
     flex: 1;
     width: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
-.input-container.name input:last-child{
+.input_container.name input:last-child{
     margin-left: 0.5em;
 } */
 
-.input-container.email input{
+.input_container.email input{
     font-family: 'Poppins', sans-serif;
 }
 
-.input-container.number{
+.input_container.number{
     font-family: 'Poppins', sans-serif;
 }
 
@@ -143,22 +143,22 @@ form input[type="number"] {
     width: 100%;
 }
 
-.input-container.password input{
+.input_container.password input{
     font-family: 'Poppins', sans-serif;
 }
 
-.input-container .password{
+.input_container .password{
     position: relative;
 }
 
-.input-container .password i{
+.input_container .password i{
     position: absolute;
     top: 42px;
     right: 16px;
 }
 
 
-.input-container.cta{
+.input_container.cta{
     display: flex;
     align-items: center;
     margin-bottom: 1.25rem;
@@ -166,7 +166,7 @@ form input[type="number"] {
 }
 
 
-.checkbox-container input{
+.checkbox_container input{
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -175,7 +175,7 @@ form input[type="number"] {
     margin-right: 0.5rem;
 }
 
-.checkbox-container {
+.checkbox_container {
     display: flex;
     position: relative;
     padding-left: 2.5rem;
@@ -186,37 +186,37 @@ form input[type="number"] {
     margin: 0 auto 0 0;
 }
 
-.checkbox-container small{
+.checkbox_container small{
     position: relative;
     top: 10px;
 }
 
-.checkbox-container p{
+.checkbox_containerr p{
     text-align: center;
     position: relative;
     top: -7px;
     left: -10px;
 }
 
-.forgot-password{
+.forgot_password{
     margin-left: 0.5rem;
     font-size: 0.875rem;
     position: relative;
     top: 10px;
 }
 
-.l-checkmark:hover,
-.r-checkmark:hover{
+.l_checkmark:hover,
+.r_checkmark:hover{
     border-color: #555454;
 }
 
-.checkbox-container input:checked~.l-checkmark,
-.checkbox-container input:checked~.r-checkmark {
+.checkbox_container input:checked~.l_checkmark,
+.checkbox_container input:checked~.r_checkmark {
     background-color: var(--purple-1);
     border: 1px solid var(--purple-1);
 }
 
-.l-checkmark{
+.l_checkmark{
     position: absolute;
     width: 24px;
     height: 24px;
@@ -227,7 +227,7 @@ form input[type="number"] {
     left: 0;
 }
 
-.r-checkmark{
+.r_checkmark{
     position: absolute;
     width: 24px;
     height: 24px;
@@ -238,18 +238,18 @@ form input[type="number"] {
     left: 0;
 }
 
-.l-checkmark::after, .r-checkmark::after{
+.l_checkmark::after, .r_checkmark::after{
     content: "";
     position: absolute;
     display: none;
 }
 
-.checkbox-container input:checked~.l-checkmark::after,
-.checkbox-container input:checked~.r-checkmark::after{
+.checkbox_container input:checked~.l_checkmark::after,
+.checkbox_container input:checked~.r_checkmark::after{
     display: block;
 }
 
-.checkbox-container .l-checkmark::after, .r-checkmark::after{
+.checkbox_container .l_checkmark::after, .r_checkmark::after{
     border: solid white;
     border-width: 0 3px 3px 0;
     width: 5px;
@@ -259,7 +259,7 @@ form input[type="number"] {
     transform: rotate(45deg);
 }
 
-.signup-btn{
+.signup_btn{
     display: block;
     width: 100%;
     background: var(--purple-1);
@@ -275,20 +275,20 @@ form input[type="number"] {
     font-family: 'Poppins', sans-serif;
 }
 
-.signup-btn a{
+.signup_btn a{
     color: white;
 }
 
-.signup-btn a:hover{
+.signup_btn a:hover{
     text-decoration: none;
 }
 
-.signup-btn:hover{
+.signup_btn:hover{
     background: var(--purple-2);
     cursor: pointer;
 }
 
-.signup-w-google-btn{
+.signup_w_google_btn{
     position: relative;
     display: block;
     width: 100%;
@@ -303,20 +303,20 @@ form input[type="number"] {
     font-family: 'Poppins', sans-serif;
 }
 
-.signup-w-google-btn a{
+.signup_w_google_btn a{
     color: #959393;
 }
 
-.signup-w-google-btn a:hover{
+.signup_w_google_btn a:hover{
     text-decoration: none;
 }
 
-.signup-w-google-btn:hover{
+.signup_w_google_btn:hover{
     border-color: #555454;
     color: #555454;
 }
 
-.signup-w-google-btn::before{
+.signup_w_google_btn::before{
     content: "";
     position: absolute;
     left: 75px;
@@ -330,7 +330,7 @@ form input[type="number"] {
     background-repeat: no-repeat;
 }
 
-.register-prompt{
+.register_prompt{
     font-size: 0.85rem;
     text-align: center;
     position: relative;
@@ -338,7 +338,7 @@ form input[type="number"] {
 }
 
 @media screen and (min-width: 900px) {
-    .split-screen{
+    .split_screen{
         flex-direction: row;
         height: 100vh;
     }

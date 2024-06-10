@@ -10,17 +10,33 @@ import cors from "cors";
 import userRoutes from "./routes/user.route.js"
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
-// import path from "path";
+import path from "path";
 dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
-app.use(express.json({ extended: false }));
+// app.use(express.json({ extended: false }));
+app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
-const PORT = process.env.PORT || 3000;
-const MONGOURL = process.env.MONGO_URL;
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+// Serve static files
+app.use(express.static(path.join(__dirname, '..', 'main-frontend', 'build')));
+
+// Serve index.html for all routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'main-frontend', 'build', 'index.html'));
+});
+
+// const PORT = process.env.PORT || 3000;
+// const MONGOURL = process.env.MONGO_URL;
 
 // connect to database
 mongoose
