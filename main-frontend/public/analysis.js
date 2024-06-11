@@ -1,8 +1,8 @@
     // Set target values for each counter
-    const likesTarget = 1200202000;
-    const sharesTarget = 200202000;
-    const commentsTarget = 450202000;
-    const ctrTarget = 60202000;
+    const likesTarget = 331;
+    const sharesTarget = 20;
+    const commentsTarget = 50;
+    const ctrTarget = 12;
 
     // Define the animation duration (in milliseconds)
     const animationDuration = 150000; // 150 seconds
@@ -14,15 +14,15 @@
     startCounter("ctrCounter", ctrTarget, animationDuration);
 
     const chart1 = createChart("Chart1", "bar", [
-        [320, 280, 180, 290, 460, 490, 310, 410, 140, 300, 150], // Instagram
-        [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000], // Facebook
-        [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478] // TikTok
+        [35, 10, 15, 16, 14, 9, 10, 11, 15, 9], 
+        [10, 5, 16, 12, 8, 17, 6, 19, 7, 11],
+        [14, 8, 13, 9, 15, 5, 12, 7, 18, 10]
     ], ["#B98DC7", "lightgreen", "#A68AE6"]);
 
     const chart2 = createChart("Chart2", "line", [
-        [320, 280, 180, 290, 460, 490, 310, 410, 140, 300, 150], // Instagram
-        [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000], // Facebook
-        [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478] // TikTok
+        [30, 7, 10, 13, 11, 9, 8, 9, 12, 9],
+        [9, 5, 15, 12, 7, 16, 6, 18, 7, 11],
+        [14, 7, 13, 8, 15, 5, 12, 7, 17, 9]         
     ], ["#B98DC7", "lightgreen", "#A68AE6"]);
 
     document.getElementById("sync").addEventListener("click", function() {
@@ -124,9 +124,6 @@ function addReportChart1(doc, yOffset) {
         const chartHeight = 80;
         drawRoundedRect(doc, 10, yOffset, 190, chartHeight + 60, 10, '#B98DC7'); // Draw a rounded box with brown fill color
         return addChartToPDF(doc, canvas, yOffset + 10, 'Chart 1: Engagement Analysis').then(newYOffset => {
-            return addWrappedText(doc, 'Chart 1 Analysis: The Instagram engagement shows a fluctuating trend with notable peaks at certain intervals. Facebook engagement depicts a steady increase over time, while TikTok shows a sharp increase indicating a viral trend.', 20, newYOffset, 170).then(() => {
-                return Promise.resolve(newYOffset + 40);
-            });
         });
     });
 }
@@ -137,8 +134,7 @@ function addReportChart2(doc) {
     return html2canvas(document.getElementById('Chart2')).then(canvas => {
         const chartHeight = 80;
         drawRoundedRect(doc, 10, 10, 190, chartHeight + 60, 10, '#B98DC7'); // Draw a rounded box with brown fill color
-        return addChartToPDF(doc, canvas, 20, 'Chart 2: CTR Analysis').then(newYOffset => {
-            return addWrappedText(doc, 'Chart 2 Analysis: Click-through rates (CTR) also reflect a similar pattern with Instagram showing fluctuations. Facebook has a linear upward trend, and TikTok displays significant spikes, suggesting highly engaging content at certain points.', 20, newYOffset, 170);
+        return addChartToPDF(doc, canvas, 20, 'Chart 2: Likes Analysis').then(newYOffset => {
         });
     });
 }
