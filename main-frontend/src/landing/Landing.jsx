@@ -35,7 +35,7 @@ function Landing() {
       <div className={st.hero}>
         <h1>Your Ultimate Social Media Marketing Manager - Create and Schedule Contents in One Stop</h1>
         <h3>Build and grow your digital presence with SocialSavvy. Streamline your marketing efforts across various social media platforms seamlessly.</h3>
-        <Link to="/register">
+        <Link to="/register" className={st.linkbtn}>
           <button className={st.signup_btn}>Join Us</button>
         </Link>
       </div>

@@ -7,7 +7,11 @@ function Faq() {
   const [securityFaqs, setSecurityFaqs] = useState([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch('/api/faqs')
+=======
+    fetch('http://localhost:4000/api/faqs')
+>>>>>>> a17aa533e174a6f00a1d6a81b679ee26ca43e1ce
       .then(response => response.json())
       .then(data => {
         const general = [];

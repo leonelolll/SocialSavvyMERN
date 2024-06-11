@@ -117,9 +117,7 @@ h3 {
 .hero h1,
 .hero h3 {
     width: 100%;
-    /* Ensure the content doesn't exceed the max width */
     margin: 0 auto;
-    /* Center the content horizontally */
 }
 
 .hero h1 {
