@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './faq.css';
+import './faq.module.css';
 
 function Faq() {
   const [generalFaqs, setGeneralFaqs] = useState([]);
@@ -7,7 +7,7 @@ function Faq() {
   const [securityFaqs, setSecurityFaqs] = useState([]);
 
   useEffect(() => {
-    fetch('/api/faqs')
+    fetch('http://localhost:4000/api/faqs')
       .then(response => response.json())
       .then(data => {
         const general = [];
