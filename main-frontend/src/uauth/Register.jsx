@@ -7,6 +7,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 import s from "./uauth.module.css";
 import { app } from "../firebase.js";
+import logo from "../assets/images/socialsavvy-logo.png"
 
 function Register() {   
     const lineStyle = { stroke: "black", strokeWidth: 1 };
@@ -77,7 +78,7 @@ function Register() {
             <div className={s.left}>
                 <section className={s.copy}>
                     <div className={s.logo}>
-                        <img src="../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+                        <img src={logo} alt="SocialSavvy" />
                     </div>
                     <h1>Create and manage your marketing contents better and easier.</h1>
                     <svg width="203" height="1">
