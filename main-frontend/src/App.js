@@ -37,8 +37,8 @@ function App() {
       <Route path='/post' element={<Post/>}/>
       <Route path='/post/createpost' element={<CreatePost/>}/>
       <Route path='/calendar' element={<Calendar/>}/>
-      <Route path='/ContentAnalysis' element={<ContentAnalysis/>}/>
-      <Route path='/analysis' element={<Analysis/>}/>
+{/*       <Route path='/ContentAnalysis' element={<ContentAnalysis/>}/>
+ */}      <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/helpdesk.html' element = {<Helpdesk/>}/>
       <Route path='/feedback.html' element = {<Feedback/>}/>
