@@ -1,7 +1,7 @@
 import FAQ from "./faq/faq.js"
 import Helpdesk from "./helpdesk/Helpdesk.js"
 import Feedback from "./feedback/feedback.js"
-
+import Analysis from "./analysisPage/Analysis";
 import React from 'react'
 import Landing from './landing/Landing.jsx'
 import Register from './uauth/Register.jsx'
@@ -10,7 +10,7 @@ import ForgetPass from './uauth/ForgetPass.jsx'
 import OTPVerif from './uauth/OTPVerif.jsx'
 import Dashboard from './dashboard/Dashboard.jsx'
 // import Layout from './shared/Layout.jsx'
-import { Routes, Route} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 
 
 function App() {  
@@ -29,6 +29,7 @@ function App() {
         <Dashboard/>
         }
       />
+      <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/helpdesk' element = {<Helpdesk/>}/>
       <Route path='/feedback' element = {<Helpdesk/>}/>
