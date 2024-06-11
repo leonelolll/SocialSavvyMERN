@@ -9,6 +9,9 @@ import Login from './uauth/Login.jsx'
 import ForgetPass from './uauth/ForgetPass.jsx'
 import OTPVerif from './uauth/OTPVerif.jsx'
 import Dashboard from './dashboard/Dashboard.jsx'
+import Post from './PostsPage/Post';
+import CreatePost from './CreatePostPage/CreatePost.jsx';
+import Calendar from './CalendarPage/Calendar.jsx';
 // import Layout from './shared/Layout.jsx'
 import {Routes, Route} from 'react-router-dom'
 
@@ -29,7 +32,14 @@ function App() {
         <Dashboard/>
         }
       />
+<<<<<<< HEAD
       <Route path='/analysis.html' element={<Analysis/>}/>
+=======
+      <Route path='/post' element={<Post/>}/>
+      <Route path='/post/createpost' element={<CreatePost/>}/>
+      <Route path='/calendar' element={<Calendar/>}/>
+      <Route path='/analysis' element={<Analysis/>}/>
+>>>>>>> c7c6c738fb740f83865a7f76835aa8cfcc2ebc24
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/helpdesk.html' element = {<Helpdesk/>}/>
       <Route path='/feedback.html' element = {<Feedback/>}/>

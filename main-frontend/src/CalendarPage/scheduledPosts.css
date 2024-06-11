@@ -1,0 +1,56 @@
+.scheduled-posts {
+    width: auto;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 500px;
+    overflow-y: scroll;
+  }
+  
+  .scheduled-posts h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .scheduledpost-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .scheduledpost-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scheduledpost-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .scheduledpost-title {
+    font-size: 18px;
+    color: #007bff;
+    margin: 0;
+  }
+  
+  .scheduledpost-date {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .scheduledpost-description {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+  }
+  

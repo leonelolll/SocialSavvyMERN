@@ -10,6 +10,7 @@ import userRoutes from "./routes/user.route.js"
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+const postsRouter = require('./routes/posts');
 dotenv.config();
 
 const app = express();
@@ -57,6 +58,8 @@ app.use("/api", feedbackRoute);
 
 app.use("/main-backend/user", userRoutes);
 app.use("/main-backend/auth", authRoutes);
+
+app.use('/', postsRouter);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
