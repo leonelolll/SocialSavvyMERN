@@ -55,6 +55,7 @@ function Register() {
             const auth = getAuth(app);
 
             const result = await signInWithPopup(auth, provider);
+            console.log(result);
             const res = await fetch("/main-backend/auth/google", {
                 method: "POST",
                 headers: {
@@ -68,6 +69,7 @@ function Register() {
             });
             const data = await res.json();
             dispatch(signInSuccess(data));
+            navigate("/login");
         } catch (error) {
             console.log("Could not login with Google", error)
         }

@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
+    "@emotion/cache": "^11.11.0",
+    "@floating-ui/dom": "^1.6.5",
+    "@fullcalendar/core": "^6.1.14",
     "@fullcalendar/daygrid": "^6.1.14",
     "@fullcalendar/interaction": "^6.1.14",
     "@fullcalendar/react": "^6.1.14",

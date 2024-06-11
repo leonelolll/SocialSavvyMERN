@@ -695,3 +695,8 @@ footer {
   margin: 0 auto;
 
 }
+
+.profpic{
+  border-radius: 50%;
+  overflow: hidden;
+}

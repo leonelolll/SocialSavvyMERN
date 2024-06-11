@@ -3,10 +3,13 @@ import s from "../dashboard/dashboard.module.css";
 import { useCookies } from "react-cookie";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux"
 
 import pfp from "../assets/images/user.png"
 
 function Navbar() {
+    const { currentUser } = useSelector(state => state.user);
+
     const navigate = useNavigate();
 
     const confirmLogout = () => {
@@ -29,9 +32,15 @@ function Navbar() {
                 </div>
             </div>
             <div className={s.right}>
-                <button className={s.rightbtn}>&#11206; Hi, user <img src={pfp} alt="user" /></button>
+                <button className={s.rightbtn}>
+                    &#11206; Hi, user
+                    <img className={s.profpic} src={currentUser.profilePicture} alt="user" />
+                </button>
                 <div className={s.right_content}>
-                    <Link to="profile.html"><h4 className={s.name}>user</h4><p className={s.email}>user@gmail.com</p></Link>
+                    <Link to="profile.html">
+                        <h4 className={s.name}>user</h4>
+                        <p className={s.email}>{currentUser.email}</p>
+                    </Link>
                     <Link to="edit-profile.html">Edit Profile</Link>
                     <button className={s.logoutbtn} onClick={confirmLogout}>Log Out</button>
                 </div>
