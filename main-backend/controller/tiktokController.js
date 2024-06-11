@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const Post = require('../models/Post');
-const Engagement = require('../models/Engagement');
+const User = require('../model/User');
+const Post = require('../model/Post');
+const Engagement = require('../model/Engagement');
 const axios = require('axios');
 
 const saveTikTokData = async (req, res) => {
