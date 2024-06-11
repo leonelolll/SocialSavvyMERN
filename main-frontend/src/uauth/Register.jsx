@@ -7,7 +7,6 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 import s from "./uauth.module.css";
 import { app } from "../firebase.js";
-// import logo from "../../assets/images/socialsavvy-logo.png"
 
 function Register() {
     const lineStyle = { stroke: "black", strokeWidth: 1 };
@@ -53,7 +52,6 @@ function Register() {
         try {
             const provider = new GoogleAuthProvider();
             const auth = getAuth(app);
-            console.log();
 
             const result = await signInWithPopup(auth, provider);
             const res = await fetch("/main-backend/auth/google", {
@@ -79,7 +77,7 @@ function Register() {
             <div className={s.left}>
                 <section className={s.copy}>
                     <div className={s.logo}>
-                        <img src="../../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+                        <img src="../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
                     </div>
                     <h1>Create and manage your marketing contents better and easier.</h1>
                     <svg width="203" height="1">

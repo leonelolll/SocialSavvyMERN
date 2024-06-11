@@ -77,16 +77,16 @@ function Dashboard() {
           <p>Platforms connected:</p>
           <div className="soc-med-container">
             <div className="soc-med-icons">
-              <img src="../../assets/images/linkedin-logo.png" alt="LinkedIn logo" />
+              <img src="../assets/images/linkedin-logo.png" alt="LinkedIn logo" />
             </div>
             <div className="soc-med-icons">
-              <img src="../../assets/images/instagram-logo.png" alt="Instagram logo" />
+              <img src="../assets/images/instagram-logo.png" alt="Instagram logo" />
             </div>
             <div className="soc-med-icons">
-              <img src="../../assets/images/facebook-logo.jpeg" alt="Facebook logo" />
+              <img src="../assets/images/facebook-logo.jpeg" alt="Facebook logo" />
             </div>
             <div className="soc-med-icons">
-              <img src="../../assets/images/tiktok-logo.jpg" alt="TikTok logo" />
+              <img src="../assets/images/tiktok-logo.jpg" alt="TikTok logo" />
             </div>
           </div>
         </div>

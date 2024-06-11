@@ -52,7 +52,7 @@ function Login() {
       <div className={s.left}>
         <section className={s.copy}>
           <div className={s.logo}>
-          <img src="../../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+          <img src="../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
           </div>
           <h1>Simplify, Create,<br />Join Us!</h1>
           <svg width="203" height="1">
