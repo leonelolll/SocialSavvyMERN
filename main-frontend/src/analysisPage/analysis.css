@@ -284,6 +284,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s;
   position: absolute;
+  font-size: small;
 }
 
 .button:hover {

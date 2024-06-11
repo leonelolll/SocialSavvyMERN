@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@100..900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 *{
     margin: 0;
     padding: 0;
@@ -81,9 +81,7 @@ nav{
     white-space: nowrap;
     display: none;
     font-size: 0.875rem;
-    
-}
-
+  }
 
 .menu li img {
     margin-right: 10px; 
@@ -109,10 +107,10 @@ nav{
     margin-bottom: 15px;
     overflow: hidden;
 }
-
 .logo h2{
-    font-size:medium ;
-}
+    font-size: 1rem;
+    font-weight: 700;
+  }
 
 .logo img{
     margin-right: 10px;
@@ -136,10 +134,6 @@ nav{
     list-style-type: none; /* Remove default bullet */
 }
 
-.logout p{
-    font-size: 0.875rem;
-  } 
-  
 .side-nav:hover{
     width: 250px;
 }
@@ -192,8 +186,8 @@ nav{
     margin: 0; /* Remove default margin for <p> */
   }
 
-  .dropbtn, .rightbtn {
-    background-color: var(--purple-3, #E4ACF7);
+.dropbtn, .rightbtn {
+    background-color: var(--purple-1, #E4ACF7);
     font-size: 13px;
     border: none;
     padding: 3px 6px; /* Adjust padding */
@@ -257,7 +251,6 @@ nav{
     background: rgba(255, 255, 255, 0.4);
     width: auto;
     display: block;
-    height: max-content;
     margin: 30px;
     margin-top: 20px;
     padding: 20px; 
@@ -265,244 +258,245 @@ nav{
     height:  min-content;
 }
 
-
-.displayPlan h4 {
-    font-weight: normal; 
+.search-box{
+    max-width: 500px;
+    margin: 10px;
+    width: 70%;
+    height: 35px;
+    display: flex;
 }
 
-.current-plan {
-    background-color: #e6f7ff;
+.search-bar{
+    
+    width: 85%;
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 2px solid #dbdbdb;
+    padding: 0 20px;
+    font-size: 16px;
+    text-transform: capitalize;
 }
 
-
-.form-group {
-    margin-bottom: 20px;
+.search-btn{
+    width: 15%;
+    height: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background: #f0f0f0;
+    border: 2px solid #dbdbdb;
+    border-left: none;
+    padding: 5px 0;
 }
 
-.form-group label {
+.search-btn img{
+    height: 100%;
+    color: #dbdbdb;
+}
+
+.radio-box{
+    max-width: 500px;
+    justify-content: center;
+    width: auto;
+}
+
+.radio-button {
+    margin: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.radio-button input[type="radio"] {
+    margin-right: auto; /* Adjust spacing between radio button and label */
+}
+
+.sort-container {
+    background: rgba(255, 255, 255, 0.7);
     display: block;
+    margin: 15px;
+    margin-top: 20px;
+    padding: 15px; 
+    border-radius: 13px;
+    height:  min-content;
+    justify-content: space-between ;
+    transition-duration: 0.5s;
+}
+
+.sort-container li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.sort-container li p{
+    white-space: nowrap;
+}
+
+.sort-container img {
+    margin-right: 10px; 
+    width: 15px;
+    transition: 0.5s;
+}
+
+.sort-button img{
+    width: 15px;
+}
+
+.sort-button{
+    border: none;
+    background: none;
+    margin-left: auto;
+}
+
+#sort-content {
+    display: flex;
+    max-width: 100vh;
+    min-width: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#sort-content > div {
+    flex-grow: 1; /* Allow the child elements to fill the width */
+    margin-right: auto; /* Add some space between the child elements */
+}
+
+/* Optional: Adjust spacing between child elements */
+#sort-content > div:last-child {
+    margin-right: 0; /* Remove right margin for the last child element */
+}
+
+#sortby, #onlyshows, #dateposted{
+    border-radius: 5px;
+    width: 100px;
+    min-width: 70px;
+    padding-inline: auto;
+}
+
+#sortFilter{
+    display: none;
+}
+
+.daterange{
+    display: block;
+    justify-content: space-between;
+
+}
+
+#submit-button{
+    padding: 5px;
+    padding-inline: 10px;
+    background-color: #AFBDFA;
+    border-radius: 6px;
+    border: none;
+    font-size: medium;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.submitbtn{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+#reset-button{
+    padding: 5px;
+    padding-inline: 10px;
+    background-color: none;
+    border-radius: 6px;
+    border: none;
+    font-size: medium;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+#submit-button:hover, #reset-button:hover {
+    background-color: #80769a79;
+  }
+
+#result{
+    padding-left: 40px;
+}
+
+#result hr{
+    margin-block: 10px;
+    margin-right: 10px;
+    border: none;
+    border-top: 1px solid black;
+}
+
+.blank-container {
+    background:none;
+    display: none;
+    justify-content: center;
+    padding: 20px;
+    height:  min-content;
+    gap: 40px;
+    grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+    margin-left: 50px;
+}
+
+.post{
+    background-color: white;
+    width: 340px;
+    height: 310px;
+}
+
+.circle{
+    background-color: #9d9d9d;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin:10px
+}
+
+.username {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
+.username p {
+    margin: 0; /* Remove default margin */
+}
+
+.view-button{
+    padding: 3px;
+    padding-inline: 10px;
+    background-color: #AFBDFA;
+    margin-left: auto;
+    margin-right: 5px;
+    border-radius: 6px;
+    border: none;
+    font-size: medium;
+    cursor: pointer;
+}
+
+.view-button:hover{
+    background-color: #7881a9;
+}
+
+.picture img{
+    width: 340px;
+    height: 220px;
     margin-bottom: 5px;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+#post img, #date img, .likes img,.views img, .comments img, .date img{
+    width: 15px;
+    margin-inline: 5px;
+    height: 15px;
 }
 
-.form-group input[type="submit"] {
-    background-color: #F3EAFF;
-    color: black;
-    border: none;
-    cursor: pointer;
-}
-
-.form-group input[type="submit"]:hover {
-    background-color: #F3EAFF;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th {
-    background-color: #F3EAFF; 
-}
-
- td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-
-.price-table,
-.displayPlan,
-.form-container,
-.receipt-history {
-    background-color: white;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-    max-width: 100%;
-    overflow: auto;
-}
-
-
-.displayPlan {
+.post-details {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
+    align-items: center;
 }
 
-
-.buttonContainer {
-    position: relative;
-}
-
-.viewButton {
-    background-color: #F3EAFF;
-    padding: 8px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.keepSubsButton,
-#confirmSubmission,
-#upgradeSubscription {
-    background-color: #DFF0D8; /* Pale green */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
+.post-details > div {
     margin-right: 10px;
 }
-
-.cancelButton,
-#confirmCancel,
-#cancelSubscription {
-    background-color: #F2DEDE; /* Pale red */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-   
-}
-.subscription-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.subscription-actions button {
-    margin-left: 10px;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-.cancelModal .modal-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.cancelModal .subscription-actions {
-    margin-top: auto;
-    display: flex; 
-    justify-content: flex-end; 
-}
-
-.cancelModal .subscription-actions button {
-    margin-left: 10px; 
-}
-
-
-#receiptModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#receiptModal .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-}
-
-#receiptModal .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#receiptModal .close:hover,
-#receiptModal .close:focus {
-    color: black;
-    text-decoration: none;
-}
-
-.modal-content1,.modal-content2 {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-}
-

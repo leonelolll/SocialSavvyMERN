@@ -15,4 +15,4 @@ const faqSchema = new mongoose.Schema({
     }
 }, { versionKey: false} );
 
-export default mongoose.model("SocialSavvy", faqSchema, "FAQs");
+export default mongoose.model("FAQs", faqSchema);
