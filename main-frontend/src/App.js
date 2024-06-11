@@ -1,5 +1,5 @@
 import FAQ from "./faq/faq.js"
-import Helpdesk from "./Helpdesk/Helpdesk.js"
+import Helpdesk from "./helpdesk/Helpdesk.js"
 import Feedback from "./feedback/feedback.jsx"
 import Analysis from "./analysisPage/Analysis"
 import React from 'react'
@@ -12,7 +12,7 @@ import Dashboard from './dashboard/Dashboard.jsx'
 import Post from './PostsPage/Post';
 import CreatePost from './CreatePostPage/CreatePost.jsx';
 import Calendar from './CalendarPage/Calendar.jsx';
-import ContentAnalysis from './ContentAnalysis/ContentAnalysis.jsx'
+import ContentAnalysis from './ContentAnalysis/ContentAnalysis.jsx';
 // import Layout from './shared/Layout.jsx'
 import {Routes, Route} from 'react-router-dom'
 
@@ -26,7 +26,7 @@ function App() {
       <Route path='/forgetpass' element = {<ForgetPass/>}/>
       <Route path='/otpverif' element = {<OTPVerif/>}/>
       <Route 
-        path='/dashboard.html' 
+        path='/ContentAnalysis' 
         element = {
           // <Layout>
           // </Layout>
