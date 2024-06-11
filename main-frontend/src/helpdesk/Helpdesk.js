@@ -242,7 +242,6 @@ const Helpdesk = () => {
                         <td>{complaint.description}</td>
                         <td className="actionButtons">
                           <button 
-                            onClick={() => sendEmail(complaint.email)}
                             type="button" 
                             class="btn btn-info"
                           >
