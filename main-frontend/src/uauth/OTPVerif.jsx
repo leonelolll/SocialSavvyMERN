@@ -31,7 +31,7 @@ function OTPVerif() {
         e.preventDefault();
         try {
             const { data } = await axios.post(
-                "http://localhost:4000/otpverif",
+                "/otpverif",
                 {
                     ...inputValue,
                 },

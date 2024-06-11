@@ -14,7 +14,7 @@ const Feedback = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/feedback");
+      const response = await axios.get("/api/feedback");
       console.log("API Response:", response.data); // Log the response data
       setFeedback(response.data); // Set the feedback state
     } catch (error) {
@@ -177,7 +177,7 @@ const Feedback = () => {
           </div>
           
           {feedback.map((feedback) => {
-            return (
+          return (
             <div className="box-container" key={feedback._id}>
               <div className="box">
                 <div className="box-top">
@@ -189,18 +189,18 @@ const Feedback = () => {
                       <strong>{feedback.name}</strong>
                       <span>{feedback.username}</span>
                     </div>
+                    {/* <div className="reviews">
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
+                    </div> */}
+                    <p>{feedback.rating}</p>
                   </div>
-                  {/* <div className="reviews">
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                    <i className="fas fa-star"></i>
-                  </div> */}
-                  <p>{feedback.rating}</p>
-                </div>
-                <div className="client-comment">
-                  <p>{feedback.comment}</p>
+                  <div className="client-comment">
+                    <p>{feedback.comment}</p>
+                  </div>
                 </div>
               </div>
             </div>

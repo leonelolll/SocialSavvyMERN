@@ -5,7 +5,7 @@ import route from "./routes/queRoute.js";
 import complaintRoute from './routes/complaintRoute.js'
 import feedbackRoute from './routes/feedbackRoute.js';
 import cors from "cors";
-
+import bodyParser from "body-parser";
 import userRoutes from "./routes/user.route.js"
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
