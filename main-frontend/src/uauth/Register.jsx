@@ -8,7 +8,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import s from "./uauth.module.css";
 import { app } from "../firebase.js";
 
-function Register() {
+function Register() {   
     const lineStyle = { stroke: "black", strokeWidth: 1 };
 
     const [formData, setFormData] = useState({});
