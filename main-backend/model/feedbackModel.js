@@ -1,12 +1,20 @@
 import mongoose from "mongoose";
 
 const feedbackSchema = new mongoose.Schema({
+    image:{
+        type: String,
+        required : true,
+    },
+    name:{
+        type : String,
+        required : true
+    },
     username:{
         type: String,
         required : true,
     },
     rating:{
-        type : String,
+        type : Number,
         required : true
     },
     comment:{

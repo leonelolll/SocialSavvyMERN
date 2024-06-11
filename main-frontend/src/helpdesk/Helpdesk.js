@@ -13,7 +13,7 @@ const Helpdesk = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/complaints");
+      const response = await axios.get("http://localhost:4000/api/complaints");
       setComplaint(response.data);
     } catch (error) {
       console.log("Error while fetching data", error);
@@ -26,7 +26,7 @@ const Helpdesk = () => {
 
   const deleteComplaint = async (ticketNo) => {
     await axios
-      .delete(`http://localhost:8000/api/delete/complaint/${ticketNo}`)
+      .delete(`http://localhost:4000/api/delete/complaint/${ticketNo}`)
       .then((response) => {
         setComplaint((prevUser) =>
           prevUser.filter((complaint) => complaint._id !== ticketNo)
@@ -46,7 +46,7 @@ const Helpdesk = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/createComplaint",
+        "http://localhost:4000/api/createComplaint",
         {
           title,
           description,
@@ -233,7 +233,7 @@ const Helpdesk = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {complaint.map((complaint, index) => {
+                  {complaint.map((complaint) => {
                     return (
                       <tr>
                         <td>{complaint.ticketNo}</td>

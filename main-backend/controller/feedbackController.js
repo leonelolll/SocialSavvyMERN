@@ -4,11 +4,10 @@ export const createFeedback = async(req, res) =>{
     try {
         const newFeedback = new Feedback(req.body);
         const savedData = await newFeedback.save();
-        res.status(200).json(savedData);
-        res.status(200).json({message:"Thank you for your feedback!"});
+        res.status(200).json({message:"Thank you for your feedback!", data: savedData });
 
     } catch (error) {
-        res.status(500).json({errorMessage:error.message})
+        res.status(500).json({ errorMessage: error.message });
     }
 };
 
