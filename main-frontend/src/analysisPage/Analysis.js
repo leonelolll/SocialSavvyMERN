@@ -3,6 +3,7 @@ import SideBar from "../analysisComponents/sidebar";
 import TopBar from "../analysisComponents/topbar";
 import React, { useEffect } from 'react';
 import '../App.css';
+import './analysis.css'
 
 export default function Analysis(){
       
