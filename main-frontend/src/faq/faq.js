@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './faq.module.css';
+import './faq.css';
 
 function Faq() {
   const [generalFaqs, setGeneralFaqs] = useState([]);
