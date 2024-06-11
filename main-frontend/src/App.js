@@ -33,15 +33,12 @@ function App() {
         <Dashboard/>
         }
       />
-<<<<<<< HEAD
       <Route path='/analysis.html' element={<Analysis/>}/>
-=======
       <Route path='/post' element={<Post/>}/>
       <Route path='/post/createpost' element={<CreatePost/>}/>
       <Route path='/calendar' element={<Calendar/>}/>
       <Route path='/ContentAnalysis' element={<ContentAnalysis/>}/>
       <Route path='/analysis' element={<Analysis/>}/>
->>>>>>> c7c6c738fb740f83865a7f76835aa8cfcc2ebc24
       <Route path='/faq' element = {<FAQ/>}/>
       <Route path='/helpdesk.html' element = {<Helpdesk/>}/>
       <Route path='/feedback.html' element = {<Feedback/>}/>
