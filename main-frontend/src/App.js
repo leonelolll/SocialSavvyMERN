@@ -10,29 +10,22 @@ import ForgetPass from './uauth/ForgetPass.jsx'
 import OTPVerif from './uauth/OTPVerif.jsx'
 import Dashboard from './dashboard/Dashboard.jsx'
 // import Layout from './shared/Layout.jsx'
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 
-function App() {  
+function App() {
   return (
     <Routes>
-      <Route path='/' element = {<Landing/>}/>
-      <Route path='/register' element = {<Register/>}/>
-      <Route path='/login' element = {<Login/>}/>
-      <Route path='/forgetpass' element = {<ForgetPass/>}/>
-      <Route path='/otpverif' element = {<OTPVerif/>}/>
-      <Route 
-        path='/dashboard' 
-        element = {
-          // <Layout>
-          // </Layout>
-        <Dashboard/>
-        }
-      />
-      <Route path='/analysis' element={<Analysis/>}/>
-      <Route path='/faq' element = {<FAQ/>}/>
-      <Route path='/helpdesk' element = {<Helpdesk/>}/>
-      <Route path='/feedback' element = {<Helpdesk/>}/>
+      <Route path='/' element={<Landing />} />
+      <Route path='/register' element={<Register />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/forgetpass' element={<ForgetPass />} />
+      <Route path='/otpverif' element={<OTPVerif />} />
+      <Route path='/dashboard'element={<Dashboard />}/>
+      <Route path='/analysis' element={<Analysis />} />
+      <Route path='/faq' element={<FAQ />} />
+      <Route path='/helpdesk' element={<Helpdesk />} />
+      <Route path='/feedback' element={<Helpdesk />} />
     </Routes>
   );
 }

@@ -97,19 +97,19 @@ function Landing() {
             <div className={st.footer_right}>
               <div className={st.footer_container}>
                 <p><strong>Resources</strong></p>
-                <p><Link to="/">User Guide</Link></p>
-                <p><Link to="/">FAQs</Link></p>
+                <p><Link to="/" className="footer_a">User Guide</Link></p>
+                <p><Link to="/" className="footer_a">FAQs</Link></p>
               </div>
               <div className={st.footer_container}>
                 <p><strong>Features</strong></p>
-                <p><Link to="/">Post Scheduling</Link></p>
-                <p><Link to="/">Content Analysis</Link></p>
-                <p><Link to="/">Engagement Analytics</Link></p>
+                <p><Link to="/" className="footer_a">Post Scheduling</Link></p>
+                <p><Link to="/" className="footer_a">Content Analysis</Link></p>
+                <p><Link to="/" className="footer_a">Engagement Analytics</Link></p>
               </div>
               <div className={st.footer_container}>
                 <p><strong>Plan & Pricing</strong></p>
-                <p><Link to="/">Subscriptions</Link></p>
-                <p><Link to="/">Packages</Link></p>
+                <p><Link to="/" className="footer_a">Subscriptions</Link></p>
+                <p><Link to="/" className="footer_a">Packages</Link></p>
               </div>
             </div>
           </div>

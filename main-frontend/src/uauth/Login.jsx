@@ -7,7 +7,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 import s from "./uauth.module.css";
 import { app } from "../firebase.js";
-// import logo from "../../assets/images/socialsavvy-logo.png"
+import logo from "../assets/images/socialsavvy-logo.png"
 
 function Login() {
   const lineStyle = { stroke: "black", strokeWidth: 1 };
@@ -78,7 +78,7 @@ function Login() {
       <div className={s.left}>
         <section className={s.copy}>
           <div className={s.logo}>
-          <img src="../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+          <img src={logo} alt="SocialSavvy" />
           </div>
           <h1>Simplify, Create,<br />Join Us!</h1>
           <svg width="203" height="1">
@@ -132,7 +132,7 @@ function Login() {
             Sign in with Google
           </button>
           <div className={s.register_prompt}>
-            <p>Don't have an account? <Link to="/register">Register here</Link></p>
+            <p>Don't have an account? <Link to="/register" className="register_here">Register here</Link></p>
           </div>
         </form>
         <ToastContainer />
