@@ -1,4 +1,4 @@
-import FAQ from "./faq/faq.js"
+import FAQ from "./faq/faq.jsx"
 import Helpdesk from "./helpdesk/Helpdesk.js"
 import Feedback from "./feedback/feedback.jsx"
 import Analysis from "./analysisPage/Analysis"
@@ -32,9 +32,9 @@ function App() {
       <Route path='/calendar' element={<Calendar />} />
       <Route path='/ContentAnalysis' element={<ContentAnalysis />} />
       <Route path='/analysis' element={<Analysis />} />
-      <Route path='/faq' element={<FAQ />} />
-      <Route path='/helpdesk.html' element={<Helpdesk />} />
-      <Route path='/feedback.html' element={<Feedback />} />
+      <Route path='/dashboard/faq' element={<FAQ />} />
+      <Route path='/dashboard/helpdesk' element={<Helpdesk />} />
+      <Route path='/dashboard/feedback' element={<Feedback />} />
     </Routes>
   );
 }

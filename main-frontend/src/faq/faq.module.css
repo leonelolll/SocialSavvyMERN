@@ -53,11 +53,11 @@
     background: linear-gradient(0deg, #F3EBFF 22.4%, #DECDF7 51.4%, #FBCCF0 93.47%);
   }
   
-  .side-nav:hover + .background {
+  .side_nav:hover + .background {
     margin-left: 250px; 
   }
   
-  .side-nav{
+  .side_nav{
     width: 90px;
     height: 100%;
     position: fixed;
@@ -125,7 +125,7 @@
     margin-right: 10px;
   }
   
-  .side-nav hr{
+  .side_nav hr{
     margin-top: auto;
     margin-bottom: 10px;
     border: none;
@@ -143,23 +143,23 @@
     list-style-type: none; /* Remove default bullet */
   }
   
-  .side-nav:hover{
+  .side_nav:hover{
     width: 250px;
   }
   
-  .side-nav:hover .logo div{
+  .side_nav:hover .logo div{
     display: block;
   }
   
-  .side-nav:hover .logo{
+  .side_nav:hover .logo{
     width: 100%;
   }
   
-  .side-nav:hover .menu li p{
+  .side_nav:hover .menu li p{
     display: block;
   }
   
-  .side-nav:hover .menu li img{
+  .side_nav:hover .menu li img{
     margin-right: 20px;
     width: 24px;
   }
@@ -211,7 +211,7 @@
   }
   
   
-  .dropdown-content {
+  .dropdown_content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -222,7 +222,7 @@
   }
   
   
-  .right-content {
+  .right_content {
     display: none;
     position: absolute;
     border-radius: 10px;
@@ -234,20 +234,20 @@
     z-index: 1;
   }
   
-  .right:hover .right-content {
+  .right:hover .right_content {
     display: block;
   }
   
-  .dropdown-content a , .right-content a{
+  .dropdown_content a , .right_content a{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
   
-  .dropdown-content a:hover, .right-content a:hover {background-color: #ddd; border-radius: 10px;}
+  .dropdown_content a:hover, .right_content a:hover {background-color: #ddd; border-radius: 10px;}
   
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown_content {display: block;}
   
   .right:hover .right-content {display: block; }
   
@@ -293,18 +293,18 @@
     padding: 1rem 0;
 }
 
-.accordion-button {
+.accordion_button {
     background-color: transparent;
     font-weight: bold;
     box-shadow: none;
     color: #007bff;
 }
 
-.accordion-button:focus {
+.accordion_button:focus {
     box-shadow: none;
 }
 
-.accordion-body {
+.accordion_body {
     padding: 1rem;
 }
 
