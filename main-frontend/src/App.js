@@ -20,6 +20,21 @@ import { Routes, Route } from 'react-router-dom'
 function App() {
   return (
     <Routes>
+      <Route path='/' element = {<Landing/>}/>
+      <Route path='/register' element = {<Register/>}/>
+      <Route path='/login' element = {<Login/>}/>
+      <Route path='/forgetpass' element = {<ForgetPass/>}/>
+      <Route path='/otpverif' element = {<OTPVerif/>}/>
+      <Route path='/dashboard'element = {<Dashboard/>}/>
+      <Route path='/analysis.html' element={<Analysis/>}/>
+      <Route path='/post' element={<Post/>}/>
+      <Route path='/post/createpost' element={<CreatePost/>}/>
+      <Route path='/calendar' element={<Calendar/>}/>
+      {/* <Route path='/ContentAnalysis' element={<ContentAnalysis/>}/> */}
+      <Route path='/analysis' element={<Analysis/>}/>
+      <Route path='/faq' element = {<FAQ/>}/>
+      <Route path='/helpdesk' element = {<Helpdesk/>}/>
+      <Route path='/feedback' element = {<Feedback/>}/>
       <Route path='/' element={<Landing />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />

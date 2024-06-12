@@ -1,22 +1,28 @@
-import "./feedback.css";
+import s from "./feedback.module.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Layout from "../shared/Layout.jsx"
 
 const Feedback = () => {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [rating, setRating] = useState(0);
-  const [feedback, setFeedback] = useState([]);
+  const [feedback, setFeedback] = useState([]); // Ensure initial state is an array
   const [comment, setComment] = useState("");
   const [showAddFeedback, setShowAddFeedback] = useState(false);
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/feedback");
+      const response = await axios.get("http://localhost:4000/api/feedback");
       console.log("API Response:", response.data); // Log the response data
-      setFeedback(response.data); // Set the feedback state
+      if (Array.isArray(response.data)) {
+        setFeedback(response.data); // Set the feedback state only if it's an array
+      } else {
+        console.error("Expected an array but got:", response.data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error); // Log any errors
     }
@@ -40,6 +46,7 @@ const Feedback = () => {
       const response = await axios.post(
         "http://localhost:4000/api/createFeedback",
         {
+          username,
           name,
           rating,
           comment,
@@ -48,7 +55,7 @@ const Feedback = () => {
 
       fetchData();
       toast.success(response.data.message, { position: "top-center" });
-      navigate("/");
+      navigate("/feedback");
       toggleAddFeedback();
     } catch (error) {
       console.log(error);
@@ -57,170 +64,85 @@ const Feedback = () => {
 
   return (
     <div>
-      <div className="side-nav">
-        <div className="logo">
-          <img src="{logo}" className="user-img" />
-          <h2>socialsavvy</h2>
-        </div>
-        <ul className="p-0 menu">
-          <li className="active">
-            <a href="dashboard.html" className="text-decoration-none">
-              <img src="{dashboard}" />
-              <p className="mb-0">Dashboard</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="post.html" className="text-decoration-none">
-              <img src="{post}" />
-              <p className="mb-0">Post</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="calendar.html" className="text-decoration-none">
-              <img src="{calender}" />
-              <p className="mb-0">Calendar</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="analysis.html" className="text-decoration-none">
-              <img src="{analysis}" />
-              <p className="mb-0">Analysis</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="viral-content.html" className="text-decoration-none">
-              <img src="{viralcontent}" />
-              <p className="mb-0">Viral Content</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="payment.html" className="text-decoration-none">
-              <img src="{payment}" />
-              <p className="mb-0">Subscription</p>
-            </a>
-          </li>
-          <li className="text-decoration-none">
-            <a href="settings.html" className="text-decoration-none">
-              <img src="{settings}" />
-              <p className="mb-0">Settings</p>
-            </a>
-          </li>
-        </ul>
-        <hr />
-        <ul className="p-0 logout">
-          <li>
-            <p>Logout</p>
-          </li>
-        </ul>
-      </div>
-      <div className="background">
-        <div className="top">
-          <div className="dropdown">
-            <button className="dropbtn">Help</button>
-            <div className="dropdown-content">
-              <a href="faq.html">FAQ</a>
-              <a href="feedback.html">Feedback</a>
-              <a href="helpdesk.html">Help Desk</a>
-            </div>
-          </div>
-          <div className="right">
-            <button className="rightbtn">
-              Hi, user
-              <img src="{user}" />
-            </button>
-            <div className="right-content">
-              <a href="profile.html">
-                <h4 className="name">user</h4>
-                <p className="email">user@gmail.com</p>
-              </a>
-              <a href="edit-profile.html">Edit Profile</a>
-              <a href="#" onclick="confirmLogout()">
-                Log Out
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="content">
-          <div className="heading">
+      <Layout />
+      <div className={s.background}>
+        <div className={s.content}>
+          <div className={s.heading}>
             <span>Feedback</span>
             <h1>Users Say</h1>
           </div>
-          <div className="box-container">
-            <div className="box">
-              <div className="box-top">
-                <div className="profile">
-                  <div className="profile-img">
-                    <img src="{image1}" />
+          <div className={s.box_container}>
+            {feedback.map((feedback) => (
+            <div className={s.box} key={feedback._id}>
+              <div className={s.box_top}>
+                  <div className={s.name_user}>
+                  <div className={s.profile_img}>
+                    <img src={feedback.image} alt="Profile" />
                   </div>
-                  <div className="name-user">
-                    <strong>Allison Joy</strong>
-                    <span>@all.jom</span>
+                    <strong>{feedback.name}</strong>
+                    <span>{feedback.username}</span>
+                    <div className={s.client_comment}>
+                      <p>{feedback.comment}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="reviews">
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                </div>
-              </div>
-              <div className="client-comment">
-                <p>
-                  SocialSavvy is a game-changer for managing social media
-                  marketing! Its seamless scheduling and insightful analytics
-                  have boosted my engagement and efficiency.
-                </p>
+                  <p>{feedback.rating} STAR</p>
               </div>
             </div>
+          ))}
           </div>
-          
-          {feedback.map((feedback) => {
-          return (
-            <div className="box-container" key={feedback._id}>
-              <div className="box">
-                <div className="box-top">
-                  <div className="profile">
-                    <div className="profile-img">
-                      <img src="{image1}" alt="Profile" />
+
+          {/* {feedback.map((feedback) => {
+            return (
+              <div className="box-container" key={feedback._id}>
+                <div className="box">
+                  <div className="box-top">
+                    <div className="profile">
+                      <div className="profile-img">
+                        <img src={feedback.image} alt="Profile" />
+                      </div>
+                      <div className="name-user">
+                        <strong>{feedback.name}</strong>
+                        <span>{feedback.username}</span>
+                      </div>
+                      <p>{feedback.rating}</p><p> STAR</p>
                     </div>
-                    <div className="name-user">
-                      <strong>{feedback.name}</strong>
-                      <span>{feedback.username}</span>
+                    <div className="client-comment">
+                      <p>{feedback.comment}</p>
                     </div>
-                    {/* <div className="reviews">
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                      <i className="fas fa-star"></i>
-                    </div> */}
-                    <p>{feedback.rating}</p>
-                  </div>
-                  <div className="client-comment">
-                    <p>{feedback.comment}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })} */}
 
           <div>
-            <button id="open-feedback-btn" onClick={toggleAddFeedback}>
+            <button id={s.open_feedback_btn} onClick={toggleAddFeedback}>
               Write A Feedback
             </button>
 
             {showAddFeedback && (
-              <div className="modal">
-                <div className="modal-content">
-                  <span className="close">
+              <div className={s.modal}>
+                <div className={s.modal_content}>
+                  <span className="close" onClick={toggleAddFeedback}>
                     &times;
                   </span>
                   <div className="feedback-form">
                     <form id="feedback-form" onSubmit={submitForm}>
+
+                    <label htmlFor="name">Your Username:</label>
+                      <br />
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autoComplete="username"
+                        required
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <br />
+                      <br />
                       <label htmlFor="name">Your Name:</label>
+                      <br />
                       <input
                         type="text"
                         id="name"
@@ -232,21 +154,15 @@ const Feedback = () => {
                       <br />
                       <br />
 
-                      <label htmlFor="star-rating">Rating:</label>
-                      <div id="star-rating">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <span
-                            key={star}
-                            className={`star ${
-                              rating >= star ? "selected" : ""
-                            }`}
-                            data-rating={star}
-                            onClick={() => handleStarRating(star)}
-                          >
-                            &#9733;
-                          </span>
-                        ))}
-                      </div>
+                      <label htmlFor="name">Rating</label>
+                      <input
+                        type="number"
+                        max={5}
+                        id="rating"
+                        name="rating"
+                        required
+                        onChange={(e) => setRating(e.target.value)}
+                      />
                       <br />
 
                       <input

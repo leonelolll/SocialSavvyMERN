@@ -3,7 +3,7 @@ import { getAllPlans, getPlanById} from '../controller/plan1Controller.js'
 
 const router = express.Router();
 
-router.get("/getAllPlans",getAllPlans);
-router.get("/plan/:id",getPlanById);
+router.get("/",getAllPlans);
+router.get("/:id",getPlanById);
 
 export default router;
