@@ -3,20 +3,22 @@ import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import "./helpdesk.css";
 import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const Helpdesk = () => {
   const [showAddComplaint, setShowAddComplaint] = useState(false);
   const [complaint, setComplaint] = useState([]);
+  const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("/api/complaints");
+      const response = await axios.get("http://localhost:4000/api/complaints");
       setComplaint(response.data);
     } catch (error) {
-      console.log("Error while fetching data", error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -26,7 +28,7 @@ const Helpdesk = () => {
 
   const deleteComplaint = async (ticketNo) => {
     await axios
-      .delete(`/api/delete/complaint/${ticketNo}`)
+      .delete(`http://localhost:4000/api/delete/complaint/${ticketNo}`)
       .then((response) => {
         setComplaint((prevUser) =>
           prevUser.filter((complaint) => complaint._id !== ticketNo)
@@ -50,15 +52,53 @@ const Helpdesk = () => {
         {
           title,
           description,
+          email,
         }
       );
 
       fetchData();
       toast.success(response.data.message, { position: "top-center" });
-      navigate("/");
+      navigate("/Helpdesk.html");
       setShowAddComplaint(false);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  // Function to handle email fetching and sending
+  const sendEmail = async (complaintId) => {
+    try {
+      const complaintDetails = await fetchComplaintDetails(complaintId); // Assuming this function fetches complaint details
+      if (!complaintDetails) return; // Handle potential errors fetching details
+  
+      const emailData = {
+        from_name: 'Your Name', // Replace with your name
+        service_id: 'your_service_id', // Replace with your emailjs service ID
+        template_id: 'your_template_id', // Replace with your emailjs template ID
+        template_params: {
+          complaint_id: complaintDetails.ticketNo,
+          complaint_title: complaintDetails.title,
+          complaint_description: complaintDetails.description,
+          email: complaintDetails.email, // User's email for notification
+        },
+      };
+  
+      const response = await emailjs.send(
+        emailData.service_id,
+        emailData.template_id,
+        emailData.template_params
+      );
+  
+      if (response.status === 200) {
+        console.log("Email sent successfully:", response.text);
+        toast.success("Email sent successfully.", { position: "top-center" });
+      } else {
+        console.error("Error sending email:", response.text);
+        toast.error("An error occurred while sending the email. Please try again later.", { position: "top-center" });
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("An error occurred while sending the email. Please try again later.", { position: "top-center" });
     }
   };
 
@@ -151,53 +191,67 @@ const Helpdesk = () => {
           <div className="fs-1 fw-semibold text-center my-4">My Ticket</div>
 
           <div className="complaintTable">
-            <button onClick={toggleAddComplaint} className="btn btn-primary">
-              New Ticket <i className="bi bi-plus"></i>
+            <button onClick={toggleAddComplaint} className="btn btn-outline-secondary p-1" style={{ width: "120px" }}>
+              New Ticket +
             </button>
 
             {showAddComplaint && (
-              <div className="popup">
-                <div className="popup-content">
-                  <button
-                    onClick={toggleAddComplaint}
-                    className="btn btn-light"
-                  >
-                    <i className="fa-solid fa-backward"></i> X
-                  </button>
+            <div className="popup">
+              <div className="popup-content">
+                <button
+                  onClick={toggleAddComplaint}
+                  className="btn btn-light p-1"
+                >
+                  <i className="fa-solid fa-backward"></i> X
+                </button>
 
-                  <h4>Add New Complaint</h4>
-                  <form className="addComplaintForm" onSubmit={submitForm}>
-                    <div className="inputGroup">
-                      <label htmlFor="name">Title:</label>
-                      <input
-                        type="text"
-                        id="title"
-                        onChange={(e) => setTitle(e.target.value)}
-                        name="title"
-                        autoComplete="off"
-                        placeholder="Enter Complaint Tittle"
-                      />
-                    </div>
-                    <div className="inputGroup">
-                      <label htmlFor="name">Description:</label>
-                      <textarea
-                        type="text"
-                        id="description"
-                        onChange={(e) => setDescription(e.target.value)}
-                        name="description"
-                        autoComplete="off"
-                        placeholder="Enter complaint description"
-                      />
-                    </div>
-                    <div className="inputGroup">
-                      <button type="submit" className="btn btn-primary">
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                <h4>Add New Complaint</h4>
+                <form className="addComplaintForm" onSubmit={submitForm}>
+                <div className="inputGroup">
+                    <label htmlFor="name">Email:</label>
+                    <input
+                      type="email"
+                      id="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                      autoComplete="off"
+                      placeholder="Enter Your Email"
+                      required = "@"// Add required attribute for validation
+                    />
+                  </div>
+                  <div className="inputGroup">
+                    <label htmlFor="name">Title:</label>
+                    <input
+                      type="title"
+                      id="title"
+                      onChange={(e) => setTitle(e.target.value)}
+                      name="title"
+                      autoComplete="off"
+                      placeholder="Enter Complaint Title"
+                      required
+                    />
+                  </div>
+                  <div className="inputGroup">
+                    <label htmlFor="name">Description:</label>
+                    <textarea
+                      type="description"
+                      id="description"
+                      onChange={(e) => setDescription(e.target.value)}
+                      name="description"
+                      autoComplete="off"
+                      placeholder="Enter complaint description"
+                      required // Add required attribute for validation
+                    />
+                  </div>
+                  <div className="inputGroup">
+                    <button type="submit" className="btn btn-outline-secondary p-1" style={{ width: "80px" }}>
+                      Submit
+                    </button>
+                  </div>
+                </form>
               </div>
-            )}
+            </div>
+          )}
 
             {complaint.length === 0 ? (
               <div className="noData">
@@ -241,11 +295,12 @@ const Helpdesk = () => {
                         <td>{complaint.title}</td>
                         <td>{complaint.description}</td>
                         <td className="actionButtons">
-                          <button 
-                            type="button" 
-                            class="btn btn-info"
+                        <button
+                            type="button"
+                            className="btn btn-info"
+                            onClick={() => sendEmail(complaint.ticketNo)}
                           >
-                            <i class="bi bi-envelope"></i>
+                            <i className="bi bi-envelope"></i>
                           </button>
 
                           <button

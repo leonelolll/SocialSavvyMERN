@@ -4,11 +4,16 @@ const complaintSchema = new mongoose.Schema({
     ticketNo:{
         type: Number,
         required : true,
-        unique: true // Ensure ticketNo is unique
+        unique: true
     },
     date:{
         type : String, // Storing date as a string in YYYY-MM-DD format
         required : true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
     },
     title:{
         type:String,

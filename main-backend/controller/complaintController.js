@@ -69,3 +69,16 @@ export const deleteComplaint = async(req, res) =>{
         res.status(500).json({ errorMessage: error.message});
     }
 };
+
+export const sendEmail = async(req, res) =>{
+    try {
+        const { emailData } = req.body;
+    
+        const info = await transporter.sendMail(emailData);
+        console.log("Email sent:", info.messageId);
+        res.json({ message: "Email sent successfully." });
+      } catch (error) {
+        console.error("Error sending email:", error);
+        res.status(500).json({ message: "Error sending email." });
+      }
+};
