@@ -26,9 +26,9 @@ function Navbar() {
             <div className={s.dropdown}>
                 <button className={s.dropbtn}>Help  &#11206;</button>
                 <div className={s.dropdown_content}>
-                    <Link to="faq" className={s.a}>FAQ</Link>
-                    <Link to="feedback" className={s.a}>Feedback</Link>
-                    <Link to="helpdesk" className={s.a}>Help Desk</Link>
+                    <Link to="/faq" className={s.a}>FAQ</Link>
+                    <Link to="/feedback" className={s.a}>Feedback</Link>
+                    <Link to="/helpdesk" className={s.a}>Help Desk</Link>
                 </div>
             </div>
             <div className={s.right}>
