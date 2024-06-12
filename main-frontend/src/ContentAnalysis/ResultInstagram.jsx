@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './ContentAnalysis.css';
+import './reset.css';
+import heartIcon from '../assets/images/heart.svg'
+import commentsIcon from '../assets/images/comment.svg'
+
 
 function ResultInstagram({ posts, selectedRadio }) {
   const [localImages, setLocalImages] = useState({});
@@ -55,23 +59,22 @@ function ResultInstagram({ posts, selectedRadio }) {
             <img src={post.displayUrl} alt="Post" />
           </div>
           <div className="post-details">
-            <div>
-              <p className="description">
-                {post.caption.length > 70
-                  ? post.caption.substring(0, 70) + '...'
-                  : post.caption}
-              </p>
-            </div>
-            <div className="post-detail-top">
+            <div className="postDetailtop">
               <div className="likes">
-                <img src="images/heart.svg" alt="Likes" />
+                <img src={heartIcon} alt="Likes" />
                 <span>{post.likesCount}</span>
               </div>
               <div className="comments">
-                <img src="images/comment.svg" alt="Comments" />
+                <img src={commentsIcon} alt="Comments" />
                 <span>{post.commentsCount}</span>
               </div>
             </div>
+              <p className="description">
+                {post.caption.length > 70
+                  ? post.caption.substring(0, 62) + '...'
+                  : post.caption}
+              </p>
+            
             <div className="date">
               <span>{new Date(post.timestamp).toLocaleDateString()}</span>
             </div>
