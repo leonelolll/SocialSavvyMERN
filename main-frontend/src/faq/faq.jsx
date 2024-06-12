@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './faq.css';
+import styles from './faq.module.css'; // Assuming you are using CSS Modules
+import Layout from "../shared/Layout.jsx";
 
 function Faq() {
   const [generalFaqs, setGeneralFaqs] = useState([]);
@@ -61,6 +62,7 @@ function Faq() {
                     id={`faq${sectionTitle.replace(' ', '')}Collapse${index}`}
                     className="accordion-collapse collapse"
                     aria-labelledby={`faq${sectionTitle.replace(' ', '')}Heading${index}`}
+                    data-bs-parent={`#faq${sectionTitle.replace(' ', '')}`}
                   >
                     <div className="accordion-body">
                       <p>{faq.anwser}</p>
@@ -77,46 +79,8 @@ function Faq() {
 
   return (
     <div>
-      <div className="side-nav">
-        <div className="logo">
-          <img src="images/logo.png" className="user-img" alt="Logo" />
-          <h2>socialsavvy</h2>
-        </div>
-        <ul className="menu p-0">
-          <li className="active"><a href="dashboard.html"><img src="images/dashboard.svg" alt="Dashboard" /><p className='m-0'>Dashboard</p></a></li>
-          <li><a href="post.html"><img src="images/post.svg" alt="Post" /><p className='m-0'>Post</p></a></li>
-          <li><a href="calendar.html"><img src="images/calendar.svg" alt="Calendar" /><p className='m-0'>Calendar</p></a></li>
-          <li><a href="analysis.html"><img src="images/analysis.svg" alt="Analysis" /><p className='m-0'>Analysis</p></a></li>
-          <li><a href="viral-content.html"><img src="images/flame.svg" alt="Viral Content" /><p className='m-0'>Viral Content</p></a></li>
-          <li><a href="payment.html"><img src="images/payment-methods.svg" alt="Subscription" /><p className='m-0'>Subscription</p></a></li>
-          <li><a href="settings.html"><img src="images/settings.svg" alt="Settings" /><p className='m-0'>Settings</p></a></li>
-        </ul>
-        <hr />
-        <ul className="logout p-0">
-          <li><p>Logout</p></li>
-        </ul>
-      </div>
-
+      <Layout/>
       <div className="background">
-        <div className="top">
-          <div className="dropdown">
-            <button className="dropbtn">Help  &#11206;</button>
-            <div className="dropdown-content">
-              <a href="faq.html">FAQ</a>
-              <a href="feedback.html">Feedback</a>
-              <a href="helpdesk.html">Help Desk</a>
-            </div>
-          </div>
-          <div className="right">
-            <button className="rightbtn">&#11206; Hi, user<img src="images/user.png" alt="User" /></button>
-            <div className="right-content">
-              <a href="profile.html"><h4 className="name">user</h4><p className="email">user@gmail.com</p></a>
-              <a href="edit-profile.html">Edit Profile</a>
-              <a href="#" /* onClick={() => confirmLogout()} */>Log Out</a>
-            </div>
-          </div>
-        </div>
-
         <div className="content">
           <section className="bsb-faq-3 py-3 py-md-5 py-xl-8">
             <div className="container">

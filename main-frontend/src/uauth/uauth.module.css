@@ -199,6 +199,7 @@ form input[type="number"] {
 }
 
 .forgot_password{
+    display: inline-block;
     margin-left: 0.5rem;
     font-size: 0.875rem;
     position: relative;
@@ -335,6 +336,10 @@ form input[type="number"] {
     text-align: center;
     position: relative;
     top: 10px;
+}
+
+.register_here{
+    
 }
 
 @media screen and (min-width: 900px) {

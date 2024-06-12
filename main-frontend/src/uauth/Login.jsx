@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { signInStart, signInSuccess, signInFailure } from "../redux/user/userSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 import s from "./uauth.module.css";
-// import logo from "../../assets/images/socialsavvy-logo.png"
+import { app } from "../firebase.js";
+import logo from "../assets/images/socialsavvy-logo.png"
 
 function Login() {
   const lineStyle = { stroke: "black", strokeWidth: 1 };
@@ -35,11 +37,11 @@ function Login() {
       console.log("Response text:", text);
 
       const data = JSON.parse(text);
-      dispatch(signInSuccess(data));
       if (data.success === false) {
-        dispatch(signInFailure());
+        dispatch(signInFailure(data));
         return;
       }
+      dispatch(signInSuccess(data));
       navigate("/dashboard");
     } catch (error) {
       dispatch(signInFailure(error));
@@ -47,12 +49,37 @@ function Login() {
 
   };
 
+  const handleGoogleClick = async () => {
+    try {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth(app);
+
+        const result = await signInWithPopup(auth, provider);
+        const res = await fetch("/main-backend/auth/google", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: result.user.displayName,
+                email: result.user.email,
+                photo: result.user.photoURL,
+            }),
+        });
+        const data = await res.json();
+        dispatch(signInSuccess(data));
+        navigate("/dashboard");
+    } catch (error) {
+        console.log("Could not login with Google", error)
+    }
+}
+
   return (
     <div className={s.split_screen}>
       <div className={s.left}>
         <section className={s.copy}>
           <div className={s.logo}>
-          <img src="../assets/images/socialsavvy-logo.png" alt="SocialSavvy" />
+          <img src={logo} alt="SocialSavvy" />
           </div>
           <h1>Simplify, Create,<br />Join Us!</h1>
           <svg width="203" height="1">
@@ -102,11 +129,11 @@ function Login() {
               <p><small><Link to="/forgetpass">Forgot password?</Link></small></p>
             </div>
           </div>
-          <button className={s.signup_w_google_btn}>
-            <Link to="/dashboard">Sign in with Google</Link>
+          <button type="button" onClick={handleGoogleClick} className={s.signup_w_google_btn}>
+            Sign in with Google
           </button>
           <div className={s.register_prompt}>
-            <p>Don't have an account? <Link to="/register">Register here</Link></p>
+            <p>Don't have an account? <Link to="/register" className="register_here">Register here</Link></p>
           </div>
         </form>
         <ToastContainer />
