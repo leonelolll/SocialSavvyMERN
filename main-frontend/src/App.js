@@ -33,7 +33,7 @@ function App() {
       {/* <Route path='/ContentAnalysis' element={<ContentAnalysis/>}/> */}
       <Route path='/analysis' element={<Analysis/>}/>
       <Route path='/faq' element = {<FAQ/>}/>
-      <Route path='/helpdesk.html' element = {<Helpdesk/>}/>
+      <Route path='/helpdesk' element = {<Helpdesk/>}/>
       <Route path='/feedback' element = {<Feedback/>}/>
       <Route path='/' element={<Landing />} />
       <Route path='/register' element={<Register />} />

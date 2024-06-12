@@ -43,7 +43,7 @@ export const getAllComplaints = async(req, res) =>{
 export const getComplaintById = async(req, res) =>{
     try {
         const id = req.params.id;
-        const complaintExist = await User.findById(id);
+        const complaintExist = await Complaint.findById(id);
         if(!complaintExist){
             return res.status(404).json({message: "Complaint not found. "});
         }
