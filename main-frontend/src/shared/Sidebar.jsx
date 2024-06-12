@@ -1,6 +1,17 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useCookies } from "react-cookie";
 import { Link } from 'react-router-dom';
+import s from "../dashboard/dashboard.module.css";
+
+import logo from "../assets/images/logo.png"
+import dashboardsvg from "../assets/images/dashboard.svg"
+import postsvg from "../assets/images/post.svg"
+import calendarsvg from "../assets/images/calendar.svg"
+import analysissvg from "../assets/images/analysis.svg"
+import framesvg from "../assets/images/flame.svg"
+import paymentsvg from "../assets/images/payment-methods.svg"
+import settingssvg from "../assets/images/settings.svg"
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -13,42 +24,26 @@ function Sidebar() {
     };
 
     return (
-        <div className="side-nav">
-            <div className="logo">
-                <img src="../../assets/images/logo.png" className="user-img" alt="socialsavvy logo"/>
+        <div className={s.side_nav}>
+            <div className={s.logo}>
+                <img src={logo} alt="logo" />
                 <h2>socialsavvy</h2>
             </div>
-            <ul className="menu">
-                <li className="active"><Link to="/dashboard"><img src="../../assets/images/dashboard.svg" alt="navigate dashboard" />
-                    <p>Dashboard</p>
-                </Link></li>
-                <li><Link to="post.html"><img src="../../assets/images/post.svg" alt="navigate post" />
-                    <p>Posts</p>
-                </Link></li>
-                <li><Link to="calendar.html"><img src="../../assets/images/calendar.svg" alt="navigate calendar" />
-                    <p>Calendar</p>
-                </Link></li>
-                <li><Link to="analysis.html"><img src="../../assets/images/analysis.svg" alt="navigate analysis" />
-                    <p>Analytics</p>
-                </Link></li>
-                <li><Link to="viral-content.html"><img src="../../assets/images/flame.svg" alt="navigate viral content" />
-                    <p>Viral Content</p>
-                </Link></li>
-                <li><Link to="payment.html"><img src="../../assets/images/payment-methods.svg" alt="navigate subscription" />
-                    <p>Subscription</p>
-                </Link></li>
-                <li><Link to="edit-profile.html"><img src="../../assets/images/settings.svg" alt="navigate settings" />
-                    <p>Settings</p>
-                </Link></li>
+            <ul className={s.menu}>
+                <li><Link to="/dashboard" class={s.a}><img src={dashboardsvg} alt="dashboard" /><p>Dashboard</p></Link></li>
+                <li><Link to="post.html" class={s.a}><img src={postsvg} alt="post" /><p>Post</p></Link></li>
+                <li><Link to="calendar.html" class={s.a}><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
+                <li ><Link to="analysis.html" class={s.a}><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
+                <li><Link to="viral-content.html" class={s.a}><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
+                <li><Link to="payment.html" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
+                <li><Link to="edit-profile.html" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
             </ul>
             <hr />
-            <ul className="logout">
-                <li><Link to="/login"></Link>
-                    <p>Logout</p>
-                </li>
+            <ul className={s.logout}>
+                <li onClick={confirmLogout}><p>Logout</p></li>
             </ul>
         </div>
-    )
+    );
 }
 
 export default Sidebar

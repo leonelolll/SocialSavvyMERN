@@ -4,7 +4,13 @@
   "private": true,
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
+<<<<<<< HEAD
     "@emailjs/browser": "^4.3.3",
+=======
+    "@emotion/cache": "^11.11.0",
+    "@floating-ui/dom": "^1.6.5",
+    "@fullcalendar/core": "^6.1.14",
+>>>>>>> bf166c8f0a03086b3510b5b4c498588d50b15700
     "@fullcalendar/daygrid": "^6.1.14",
     "@fullcalendar/interaction": "^6.1.14",
     "@fullcalendar/react": "^6.1.14",
@@ -17,6 +23,10 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "firebase": "^10.12.2",
+    "install": "^0.13.0",
+    "jquery": "^3.7.1",
+    "npm": "^10.8.1",
+    "popper.js": "^1.16.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-cookie": "^7.1.4",
