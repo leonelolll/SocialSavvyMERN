@@ -14,6 +14,7 @@ import complaintRoute from './routes/complaintRoute.js';
 import feedbackRoute from './routes/feedbackRoute.js';
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import postsRouter from "./routes/posts.js";
 //import postsRouter from "./routes/posts.js";
 
 // Configure environment variables
@@ -45,7 +46,7 @@ app.use("/api", complaintRoute);
 app.use("/api", feedbackRoute);
 app.use("/main-backend/user", userRoutes);
 app.use("/main-backend/auth", authRoutes);
-//app.use("/", postsRouter);
+app.use("/", postsRouter);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'main-frontend', 'build')));

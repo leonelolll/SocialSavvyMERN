@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import logo from '../assets/images/logo.png';
+import dashboardIcon from '../assets/images/dashboard.svg';
+import postIcon from '../assets/images/post.svg';
+import calendarIcon from '../assets/images/calendar.svg';
+import analysisIcon from '../assets/images/analysis.svg';
+import flameIcon from '../assets/images/flame.svg';
+import paymentIcon from '../assets/images/payment-methods.svg';
+import settingsIcon from '../assets/images/settings.svg';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Select from 'react-select';
 import './createpost.css';
 import { BlobServiceClient } from '@azure/storage-blob';
+import UserPic from '../assets/images/user.png';
+import Media from '../assets/images/previewimage.jpg';
 
 function CreatePost() {
   const [platforms, setPlatforms] = useState([]);
   const [title, setTitle] = useState('');
   const [caption, setCaption] = useState('');
-  const [media, setMedia] = useState('../images/previewimage.jpg');
+  const [media, setMedia] = useState(Media);
   const [mediaType, setMediaType] = useState('image'); // Added state for media type
   const [postType, setPostType] = useState('now');
   const [scheduleTime, setScheduleTime] = useState('');
@@ -149,13 +159,67 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
       }
     };
     
+    const confirmLogout = () => {
+      const confirmLogout = window.confirm('Are you sure you want to log out?');
+      if (confirmLogout) {
+        window.location.href = 'login.html';
+      }
+    };
     
     return (
       <div>
-      
+      <div className="side-nav">
+      <div className="logo">
+        <img src={logo} className="user-img" alt="Logo" />
+        <h2>socialsavvy</h2>
+      </div>
+      <ul className="menu">
+        <li><a className='a' href="dashboard.html"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
+        <li className="active"><a className='a' href="/"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
+        <li><a className='a' href="calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
+        <li><a className='a' href="analysis.html"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
+        <li><a className='a' href="viral-content.html"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
+        <li><a className='a' href="payment.html"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
+        <li><a className='a' href="settings.html"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
+      </ul>
+      <hr />
+      <ul className="logout">
+        <li><p>Logout</p></li>
+      </ul>
+      </div>
+
+      <div className="background">
+
+      <div className="top">
+              <div className="dropdown">
+                  <button className="dropbtn">
+                  Help &#11206;
+                  </button>
+                  <div className="dropdown-content">
+                  <a href="faq.html">FAQ</a>
+                  <a href="feedback.html">Feedback</a>
+                  <a href="helpdesk.html">Help Desk</a>
+                  </div>
+              </div>
+              <div className="right">
+                  <button className="rightbtn">
+                  &#11206; Hi, user
+                  <img src={UserPic} alt="User" />
+                  </button>
+                  <div className="right-content">
+                  <a href="profile.html">
+                      <h4 className="name">user</h4>
+                      <p className="email">user@gmail.com</p>
+                  </a>
+                  <a href="edit-profile.html">Edit Profile</a>
+                  <a href="#" onClick={confirmLogout}>Log Out</a>
+                  </div>
+              </div>
+          </div>
+
         <div className="container">
           <h2>Create New Post</h2>
-          <div className="row">
+          <div className="createpost-row">
             <div className="column">
               <div className="preview-button">
                 <div className="text">Preview:</div>
@@ -167,8 +231,8 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                 <div className="preview-post">
 
                   <div className="profile">
-                    <img src="../images/user.png" alt="User" />
-                    <p className="username">username</p>
+                    <img src={UserPic} alt="User" />
+                    <p className="username-createpost">username</p>
                   </div>
 
                   <div id="content-media">
@@ -201,7 +265,6 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                 <label htmlFor="title">Content Title: </label>
                 <input type="text" name="title" id="content-title" onChange={e => setTitle(e.target.value)}/>
                 <fieldset>
-                  <legend className="content">Content</legend>
                   <div>
                     <label htmlFor="input-caption" className="label-input-caption">Caption:</label><br />
                     <textarea id="input-caption" title="input-caption" rows="5" value={caption} onChange={e => setCaption(e.target.value)} /><br />
@@ -242,6 +305,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
             </div>
           </div>
         </div>
+      </div>
       </div>
   );
 }

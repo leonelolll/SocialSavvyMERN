@@ -1,4 +1,7 @@
 import React from 'react';
+import Heart from "../assets/images/heart.svg";
+import Views from "../assets/images/eye.svg";
+import Comments from "../assets/images/comment.svg";
 import './modal.css'; // Ensure you have proper styling
 
 const Modal = ({ isOpen, onClose, post, sasToken }) => {
@@ -6,7 +9,7 @@ const Modal = ({ isOpen, onClose, post, sasToken }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-post-content" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>X</button>
         <div className="modal-post">
             <div className="modal-picture">
@@ -21,26 +24,26 @@ const Modal = ({ isOpen, onClose, post, sasToken }) => {
                 <div></div>
             )
                 :(
-            <div className="post-details"><div className="likes">
-                    <img src="images/heart.svg" alt="Likes" />
+            <div className="post-details-modal">
+                    <div className="likes">
+                    <img src={Heart} alt="Likes" />
                     <span>100</span>
                 </div>
                 <div className="views">
-                    <img src="images/eye.svg" alt="Views" />
+                    <img src={Views} alt="Views" />
                     <span>100</span>
                 </div>
                 <div className="comments">
-                    <img src="images/comment.svg" alt="Comments" />
+                    <img src={Comments} alt="Comments" />
                     <span>100</span>
                 </div>
                 <div className="date" value={post.value}>
-                    <img src="images/clock.svg" alt="Date" />
                     <span>{new Date(post.createdAt).toLocaleDateString()}</span>
                 </div>
             </div>
                 )}
             <p><strong>Username</strong> {post.Caption}</p>
-            <p>{post.PlatformName}</p>
+            <p>Platforms: {post.PlatformName}</p>
           </div>
         </div>
       </div>

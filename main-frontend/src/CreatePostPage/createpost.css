@@ -77,7 +77,7 @@ nav{
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding-block: 10px;
+    padding-block: 15px;
     padding-inline: 20px;
 }
 .menu li p{
@@ -271,7 +271,7 @@ nav{
     flex-direction: column;
 }
 
-.row{
+.createpost-row{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap-reverse;

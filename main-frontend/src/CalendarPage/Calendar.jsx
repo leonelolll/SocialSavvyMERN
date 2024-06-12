@@ -6,6 +6,15 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import './calendar.css';
 import ScheduledPosts from './scheduledPostsData';
 import * as bootstrap from "bootstrap";
+import logo from '../assets/images/logo.png';
+import dashboardIcon from '../assets/images/dashboard.svg';
+import postIcon from '../assets/images/post.svg';
+import calendarIcon from '../assets/images/calendar.svg';
+import analysisIcon from '../assets/images/analysis.svg';
+import flameIcon from '../assets/images/flame.svg';
+import paymentIcon from '../assets/images/payment-methods.svg';
+import settingsIcon from '../assets/images/settings.svg';
+import UserPic from '../assets/images/user.png';
 
 const CalendarPage = () => {
   const [scheduledPostsData, setScheduledPostsData] = useState([]);
@@ -18,7 +27,7 @@ const CalendarPage = () => {
         const data = await response.json();
 
         // Filter posted and scheduled posts
-        const scheduled = data.filter(post => post.Status === "Scheduled");
+        const scheduled = Array.isArray(data) ? data.filter(post => post.Status === "Scheduled") : [];
         setScheduledPostsData(scheduled);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -49,7 +58,62 @@ const CalendarPage = () => {
     calendarApi.gotoDate(date);
   };
 
+  const confirmLogout = () => {
+    const confirmLogout = window.confirm('Are you sure you want to log out?');
+    if (confirmLogout) {
+      window.location.href = 'login.html';
+    }
+  };
+
   return (
+    <div><div className="side-nav">
+    <div className="logo">
+      <img src={logo} className="user-img" alt="Logo" />
+      <h2>socialsavvy</h2>
+    </div>
+    <ul className="menu">
+        <li><a className='a' href="dashboard.html"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
+        <li className="active"><a className='a' href="/"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
+        <li><a className='a' href="calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
+        <li><a className='a' href="analysis.html"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
+        <li><a className='a' href="viral-content.html"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
+        <li><a className='a' href="payment.html"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
+        <li><a className='a' href="settings.html"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
+      </ul>
+    <hr />
+    <ul className="logout">
+      <li><p>Logout</p></li>
+    </ul>
+    </div>
+
+    <div className="background">
+
+    <div className="top">
+            <div className="dropdown">
+                <button className="dropbtn">
+                Help &#11206;
+                </button>
+                <div className="dropdown-content">
+                <a href="faq.html">FAQ</a>
+                <a href="feedback.html">Feedback</a>
+                <a href="helpdesk.html">Help Desk</a>
+                </div>
+            </div>
+            <div className="right">
+                <button className="rightbtn">
+                &#11206; Hi, user
+                <img src={UserPic} alt="User" />
+                </button>
+                <div className="right-content">
+                <a href="profile.html">
+                    <h4 className="name">user</h4>
+                    <p className="email">user@gmail.com</p>
+                </a>
+                <a href="edit-profile.html">Edit Profile</a>
+                <a href="#" onClick={confirmLogout}>Log Out</a>
+                </div>
+            </div>
+        </div>
     <div className="container">
       <h2>Content Calendar</h2>
 
@@ -64,7 +128,7 @@ const CalendarPage = () => {
               center: 'title',
               end: 'dayGridMonth,timeGridWeek,timeGridDay',
             }}
-            height={"500px"}
+            height={"75vh"}
             events={events}
             eventDidMount={(info) => {
               return new bootstrap.Popover(info.el, {
@@ -82,6 +146,8 @@ const CalendarPage = () => {
         <ScheduledPosts onDateClick={handleDateClick} scheduledPostsData={scheduledPostsData} />
 
       </div> 
+    </div>
+    </div>
     </div>
   );
 };

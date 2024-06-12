@@ -75,7 +75,7 @@ nav{
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding-block: 10px;
+    padding-block: 15px;
     padding-inline: 20px;
 }
 .menu li p{
@@ -87,6 +87,13 @@ nav{
 .menu li img {
     margin-right: 10px; 
     width: 24px;
+}
+
+.menu li .a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
 }
 
 .menu li.active {
@@ -202,9 +209,10 @@ nav{
     }
     
     .dropdown-post {
-      margin-left: 170px;
+      margin-left: 140px;
       position: relative;
       display: inline-block;
+      align-items: center;
     }
   
     
@@ -327,12 +335,14 @@ nav{
 }
 
 .post {
-  background-color: white;
-  width: 300px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  align-items: center;
-  height: 300px;
+    background-color: white;
+    width: 340px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 .username {
@@ -347,7 +357,7 @@ nav{
   height: 40px;
   background-color: #ccc;
   border-radius: 50%;
-  margin-right: 10px;
+  margin: 10px;
 }
 
 .picture img {
@@ -359,14 +369,21 @@ nav{
   width: 300px; 
 }
 
-.post-details {
+.post-details-postpage {
   padding: 10px;
+  display: flex;
+  align-items: center;
 }
 
-.post-details div {
+.post-details-postpage div {
+  margin-right: 10px;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.date{
+  margin-left: 40px;
 }
 
 .post-details img {
