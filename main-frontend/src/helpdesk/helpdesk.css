@@ -249,7 +249,7 @@
   }
 
   .actionButtons button {
-    margin: 0 12px;
+    margin: 0 5px;
   }
 
   .wrap-text {
@@ -283,11 +283,17 @@
 .popup .inputGroup input{
     margin-bottom: 5px;
     padding: 10px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 1px;
 }
 
 .popup .inputGroup textarea{
     margin-bottom: 5px;
     padding: 10px;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 1px;
 }
 
 .popup .inputGroup button{
