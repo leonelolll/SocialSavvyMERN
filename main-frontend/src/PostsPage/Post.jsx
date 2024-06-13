@@ -204,8 +204,8 @@ const PostPage = () => {
       } catch (error){
         console.error('Error updating post:', error);
       }
-    }
-  };
+    };
+  
 
 
   // Function to handle click on a post
