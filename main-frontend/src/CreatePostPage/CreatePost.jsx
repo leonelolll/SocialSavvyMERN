@@ -24,6 +24,7 @@ function CreatePost() {
   const [scheduleTime, setScheduleTime] = useState('');
   const [url, setUrl] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState([]); // State for selected platforms
+  const [selectedDraft, setSelectedDraft] = useState("");
   const [file, setFile] = useState(null);
 
   // Function to handle platform selection
@@ -96,13 +97,17 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
   };
 
   //fetch from user linked social media
-  const options = [
+  const platformsOptions = [
     { label: "Facebook", value: "facebook" },
     { label: "Instagram", value: "instagram" },
     { label: "Twitter", value: "twitter" },
     { label: "Linkedin", value: "linkedin" },
     ];
     
+  const draftsOptions = [
+    { label: "Sale", value: "sale"}
+  ];
+
     const handlePostClick = async (event) => {
       event.preventDefault();
       console.log("post clicked");
@@ -174,13 +179,13 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
         <h2>socialsavvy</h2>
       </div>
       <ul className="menu">
-        <li><a className='a' href="dashboard.html"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
-        <li className="active"><a className='a' href="/"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
-        <li><a className='a' href="calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
-        <li><a className='a' href="analysis.html"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
-        <li><a className='a' href="viral-content.html"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
-        <li><a className='a' href="payment.html"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
-        <li><a className='a' href="settings.html"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
+        <li><a className='a' href="http://localhost:3000/dashboard"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
+        <li className="active"><a className='a' href="http://localhost:3000/post"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
+        <li><a className='a' href="http://localhost:3000/calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
+        <li><a className='a' href="http://localhost:3000/analysis"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
+        <li><a className='a' href="http://localhost:3000/ContentAnalysis"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
+        <li><a className='a' href="http://localhost:3000/subscriptions"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
+        <li><a className='a' href="http://localhost:3000/settings"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
       </ul>
       <hr />
       <ul className="logout">
@@ -196,9 +201,9 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                   Help &#11206;
                   </button>
                   <div className="dropdown-content">
-                  <a href="faq.html">FAQ</a>
-                  <a href="feedback.html">Feedback</a>
-                  <a href="helpdesk.html">Help Desk</a>
+                  <a href="http://localhost:3000/faq">FAQ</a>
+                  <a href="http://localhost:3000/feedback">Feedback</a>
+                  <a href="http://localhost:3000/helpdesk">Help Desk</a>
                   </div>
               </div>
               <div className="right">
@@ -255,9 +260,17 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
             </div>
 
             <div className="edit-content">
-              <form><label htmlFor="platform" className="label-choose-platform">Publish to:</label><br />
+              <form>
+                <label htmlFor="platform" className="label-choose-draft">Draft:</label><br />
               <Select
-                options={options}
+                options={draftsOptions}
+                isMulti={false}
+                value={selectedDraft}
+                onChange={handlePlatformChange}
+              /><br />
+                <label htmlFor="platform" className="label-choose-platform">Publish to:</label><br />
+              <Select
+                options={platformsOptions}
                 isMulti={true}
                 value={selectedPlatforms}
                 onChange={handlePlatformChange}
@@ -289,6 +302,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                   <div className="postType">
                     <label htmlFor="post-type">Select post type:</label>
                     <select id="post-type" value={postType} onChange={e => setPostType(e.target.value)}>
+                      <option value="draft">Save as Draft</option>
                       <option value="now">Post Now</option>
                       <option value="schedule">Schedule Post</option>
                     </select>

@@ -382,8 +382,14 @@ nav{
   margin-bottom: 10px;
 }
 
+.likes img, .views img, .comments img, .date img, .shares img, .viral-percentage img {
+  width: 15px;
+  margin-inline: 5px;
+  height: 15px;
+}
+
 .date{
-  margin-left: 40px;
+  margin-left: 0;
 }
 
 .post-details img {

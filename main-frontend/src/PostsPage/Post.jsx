@@ -46,7 +46,7 @@ const Filter = ({ platforms, selectedPlatform, onPlatformChange, selectedTimefra
   </div>
 );
 
-const Post = ({ post, onClick, onDelete }) => (
+const Post = ({ post, onClick, onDelete, virality }) => (
   <div className="post" >
     <div className="username">
       <div className="circle"></div>
@@ -81,6 +81,11 @@ const Post = ({ post, onClick, onDelete }) => (
         <img src={Comments} alt="Comments" />
         <span>100</span>
       </div>
+      <div className="viral-percentage">
+        <img src={flameIcon} alt="Views" />
+        <span>{virality}%</span>
+      </div>
+
       <div className="date" value={post.value}>
         
         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
@@ -89,10 +94,10 @@ const Post = ({ post, onClick, onDelete }) => (
   </div>
 );
 
-const PostList = ({ posts, onPostClick, onDelete }) => (
+const PostList = ({ posts, onPostClick, onDelete, viralPercentage }) => (
   <div className="post-list">
     {posts.map((post, index) => (
-      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} />
+      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} virality={viralPercentage} />
     ))}
   </div>
 );
@@ -201,7 +206,19 @@ const PostPage = () => {
       window.location.href = 'login.html';
     }
   };
-  
+
+  const calculateViralPercentage = () => {
+    const engagementRate = (22000 + 35000) / 50000 * 100;
+    const averageERBenchmark = 5;
+  let viralPercentage;
+  if (averageERBenchmark) {
+    viralPercentage = (engagementRate / averageERBenchmark) * 100;
+  } else {
+    viralPercentage = engagementRate; // Just display ER as a relative measure
+  }
+  return viralPercentage.toFixed(2); // Format to two decimal places
+  };
+
 
   return (
     <div >
@@ -211,13 +228,13 @@ const PostPage = () => {
         <h2>socialsavvy</h2>
       </div>
       <ul className="menu">
-        <li><a className='a' href="dashboard.html"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
-        <li className="active"><a className='a' href="/"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
-        <li><a className='a' href="calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
-        <li><a className='a' href="analysis.html"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
-        <li><a className='a' href="viral-content.html"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
-        <li><a className='a' href="payment.html"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
-        <li><a className='a' href="settings.html"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
+      <li><a className='a' href="http://localhost:3000/dashboard"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
+        <li className="active"><a className='a' href="http://localhost:3000/post"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
+        <li><a className='a' href="http://localhost:3000/calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
+        <li><a className='a' href="http://localhost:3000/analysis"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
+        <li><a className='a' href="http://localhost:3000/ContentAnalysis"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
+        <li><a className='a' href="http://localhost:3000/subscriptions"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
+        <li><a className='a' href="http://localhost:3000/settings"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
       </ul>
       <hr />
       <ul className="logout">
@@ -269,7 +286,7 @@ const PostPage = () => {
                 />
                 <button onClick={() => window.location.href='/post/createpost'} className="add-post-button">Add New Post</button>
               </div>
-              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost} />
+              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost} viral={calculateViralPercentage} />
             </div>
           </div>
           {modalPost && (
