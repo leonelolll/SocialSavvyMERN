@@ -46,7 +46,7 @@ const Filter = ({ platforms, selectedPlatform, onPlatformChange, selectedTimefra
   </div>
 );
 
-const Post = ({ post, onClick, onDelete, virality }) => (
+const Post = ({ post, onClick, onDelete, onEdit, virality }) => (
   <div className="post" >
     <div className="username">
       <div className="circle"></div>
@@ -56,7 +56,7 @@ const Post = ({ post, onClick, onDelete, virality }) => (
                   &#8230;
                   </button>
                   <div className="dropdown-post-content">
-                  <button  >Edit</button>
+                  <button onClick={() => onEdit(post._id,)} >Edit</button>
                   <button onClick={() => onDelete(post._id)}>Delete</button> {/* Delete button */}
                   </div>
               </div>
@@ -94,10 +94,10 @@ const Post = ({ post, onClick, onDelete, virality }) => (
   </div>
 );
 
-const PostList = ({ posts, onPostClick, onDelete, viralPercentage }) => (
+const PostList = ({ posts, onPostClick, onDelete, onUpdate, viralPercentage }) => (
   <div className="post-list">
     {posts.map((post, index) => (
-      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} virality={viralPercentage} />
+      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} onEdit={onUpdate} virality={viralPercentage} />
     ))}
   </div>
 );
@@ -190,6 +190,23 @@ const PostPage = () => {
       console.error('Error deleting post:', error);
     }
   };
+
+  // Function to edit a post
+  const handleEditPost = async (postId, updatedPost) => {
+    try {
+      const response = await fetch(`http://localhost:4000/posts/${postId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedPost),
+        });
+        const updatedPostData = await response.json();
+        setPostedPosts(postedPosts.map(post => post._id === postId ? updatedPostData : post)); // Update post in state
+      } catch (error){
+        console.error('Error updating post:', error);
+      }
+    }
+  };
+
 
   // Function to handle click on a post
   const handlePostClick = (post) => {
@@ -286,7 +303,7 @@ const PostPage = () => {
                 />
                 <button onClick={() => window.location.href='/post/createpost'} className="add-post-button">Add New Post</button>
               </div>
-              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost} viral={calculateViralPercentage} />
+              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost} onUpdate={handleEditPost} viral={calculateViralPercentage} />
             </div>
           </div>
           {modalPost && (

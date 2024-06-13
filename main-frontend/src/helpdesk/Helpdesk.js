@@ -69,7 +69,7 @@ const Helpdesk = () => {
 
       fetchData();
       toast.success(response.data.message, { position: "top-center" });
-      navigate("/Helpdesk.html");
+      navigate("http://localhost:3000/helpdesk");
       setShowAddComplaint(false);
     } catch (error) {
       console.log(error);
