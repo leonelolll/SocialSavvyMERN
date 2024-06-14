@@ -27,6 +27,10 @@ body {
   cursor: pointer;
 }
 
+.a:hover{
+  text-decoration: none;
+}
+
 .a p {
   margin: 0;
 }
@@ -407,6 +411,10 @@ nav {
   align-self: flex-end;
 }
 
+.link_btn:hover{
+  transform: scale(1.05);
+}
+
 .right_column p {
   font-weight: 600;
   font-size: 1em;
@@ -435,6 +443,10 @@ nav {
 
 .soc_med_container .soc_med_icons:hover {
   animation: float 0.5s ease-in-out infinite alternate;
+}
+
+.soc_med_icons:hover{
+  transform: scale(1.25);
 }
 
 .subscription_plan {
@@ -478,6 +490,10 @@ nav {
   letter-spacing: 0.5px;
   align-self: flex-end;
   margin-top: 5px;
+}
+
+.payment_btn:hover{
+  transform: scale(1.05);
 }
 
 .payment_content .payment_description {
@@ -537,6 +553,10 @@ nav {
   margin: 50px auto;
   margin-top: -10px;
   margin-bottom: 0px;
+}
+
+.analytics_btn:hover{
+  transform: scale(1.05);
 }
 
 .scheduled_postings {

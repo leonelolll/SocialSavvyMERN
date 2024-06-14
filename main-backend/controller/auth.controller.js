@@ -2,6 +2,7 @@ import User from "../model/userModel.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../util/error.js";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 export const signup = async (req, res, next) => {
     const { email, password, cpassword } = req.body;
@@ -39,6 +40,89 @@ export const signin = async (req, res, next) => {
         next(error);
     }
 };
+
+export const forgetpass = async (req, res) => {
+    const { email } = req.body;
+    try {
+        console.log("Request Body:", req.body);
+
+        //Find the user by email
+        const user = await User.findOne({ email });
+
+        //If user not found, send error message
+        if (!user) {
+            return res.status(404).send({ message: "User not found!" });
+        }
+
+        //Generate a unique JWT token for the user that contains the user's id
+        const token = jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, { expiresIn: "10m", });
+
+        // Send the token to the user's email
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD_APP_EMAIL,
+            },
+        });
+
+        //Email configuration
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: req.body.email,
+            subject: "Reset Password",
+            html: `<h1>Reset Your Password</h1>
+            <p>Click on the following link to reset your password:</p>
+            <a href="http://localhost:3000/resetpass/${token}">http://localhost:5173/resetpass/${token}</a>
+            <p>The link will expire in 10 minutes.</p>
+            <p>If you didn't request a password reset, please ignore this email.</p>`,
+        };
+
+        // Send the email
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                return res.status(500).send({ message: err.message });
+            }
+            res.status(200).send({ message: "Email sent!" });
+        });
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
+}
+
+export const resetPassword = async (req, res) => {
+    try {
+        // Verify the token sent by the user
+        const decodedToken = jwt.verify(
+            req.params.token,
+            process.env.TOKEN_KEY
+        );
+
+        // If the token is invalid, return an error
+        if (!decodedToken) {
+            return res.status(401).send({ message: "Invalid token" });
+        }
+
+        // find the user with the id from the token
+        const user = await User.findOne({ _id: decodedToken.userId });
+        if (!user) {
+            return res.status(401).send({ message: "no user found" });
+        }
+
+        // Hash the new password
+        const salt = await bcryptjs.genSalt(10);
+        req.body.newPassword = await bcryptjs.hash(req.body.newPassword, salt);
+
+        // Update user's password, clear reset token and expiration time
+        user.password = req.body.newPassword;
+        await user.save();
+
+        // Send success response
+        res.status(200).send({ message: "Password updated" });
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
+}
 
 export const google = async (req, res, next) => {
     try {
@@ -87,7 +171,7 @@ export const signout = (req, res) => {
 
 export const authenticate = (req, res, next) => {
     const token = req.cookies.access_token;
-    if(!token) {
+    if (!token) {
         return res.status(403).json({ success: false, message: "Unauthorised!" });
     }
     try {

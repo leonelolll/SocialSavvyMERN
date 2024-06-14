@@ -4,6 +4,8 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import s from "../dashboard/dashboard.module.css";
 import Layout from "../shared/Layout.jsx"
+import Chart from 'chart.js/auto';
+
 
 import linkedin from "../assets/images/linkedin-logo.png"
 import instagram from "../assets/images/instagram-logo.png"
@@ -17,6 +19,21 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState('Today');
   const [lineStyle, setLineStyle] = useState({ width: 0, left: 0 });
   const tabRefs = useRef([]);
+
+  // useEffect(() => {
+  //   const loadScript = (src) => {
+  //     const script = document.createElement('script');
+  //     script.src = src;
+  //     script.async = true;
+  //     document.body.appendChild(script);
+  //   };
+
+  //   // Load external scripts
+  //   loadScript('https://cdn.jsdelivr.net/npm/chart.js');
+  //   loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js');
+  //   loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+  // }, []);
+
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -72,6 +89,44 @@ function Dashboard() {
     }
   };
 
+  useEffect(() => {
+    createChart("Chart1", "bar", [
+      [35, 10, 15, 16, 14, 9, 10, 11, 15, 9],
+      [10, 5, 16, 12, 8, 17, 6, 19, 7, 11],
+      [14, 8, 13, 9, 15, 5, 12, 7, 18, 10]
+    ], ["#B98DC7", "lightgreen", "#A68AE6"]);
+
+    createChart("Chart2", "line", [
+      [30, 7, 10, 13, 11, 9, 8, 9, 12, 9],
+      [9, 5, 15, 12, 7, 16, 6, 18, 7, 11],
+      [14, 7, 13, 8, 15, 5, 12, 7, 17, 9]
+    ], ["#B98DC7", "lightgreen", "#A68AE6"]);
+  }, []);
+
+
+  function createChart(canvasId, chartType, dataValues, colors) {
+    const xValues = Array.from({ length: dataValues[0].length }, (_, i) => i + 1);
+
+    new Chart(canvasId, {
+      type: chartType,
+      data: {
+        labels: xValues,
+        datasets: dataValues.map((data, index) => ({
+          label: ['Instagram', 'Facebook', 'TikTok'][index],
+          data: data,
+          borderColor: colors[index],
+          backgroundColor: colors[index],
+          fill: false
+        }))
+      },
+      options: {
+        plugins: {
+          legend: { display: true }
+        }
+      }
+    });
+  }
+
   const confirmLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
     if (confirmLogout) {
@@ -98,10 +153,12 @@ function Dashboard() {
                 <p>Connect your social media accounts to seamlessly share your content across platforms with
                   just a click!</p>
               </div>
-              <button className={s.link_btn} id="manage-btn" >Manage</button>
+              <Link to="/settings" className={s.a}>
+                <button className={s.link_btn} id="manage-btn" >Manage</button>
+              </Link>
             </div>
             <div className={s.right_column}>
-              <p>Platforms connected:</p>
+              <p>Platforms supported:</p>
               <div className={s.soc_med_container}>
                 <div className={s.soc_med_icons}>
                   <img src={linkedin} alt="LinkedIn logo" />
@@ -130,7 +187,7 @@ function Dashboard() {
               <div className={s.payment_description}>
                 <p>Your next bill is for RM 29.99 on 23/04/2024</p>
               </div>
-              <button  className={s.payment_btn}>View</button>
+              <button className={s.payment_btn}>View</button>
             </div>
           </div>
         </div>
@@ -142,76 +199,77 @@ function Dashboard() {
           <div className={s.analytics_content}>
             <div className={s.pattern} id="pattern1">
               <h3>Content Performance Analysis</h3>
-              <canvas id="Chart1"></canvas>
+              <canvas id="Chart1"></canvas> {/* Include the canvas element */}
             </div>
           </div>
           <div className={s.right_column}>
             <div className={s.pattern} id="pattern2">
-              <h3>Click-Through Rate Analysis</h3>
-              <canvas id="Chart2"></canvas>
+              <h3>Likes Analysis</h3>
+              <canvas id="Chart2"></canvas> {/* Include the canvas element */}
             </div>
-          </div >
-          <button className={s.analytics_btn}>View more</button>
+          </div>
+
         </div >
-
-        <div className={s.scheduled_postings}>
-          <div className={s.scheduled_content}>
-            <div className={s.scheduled_title}>
-              <p>Scheduled Postings</p>
-            </div>
-            <div className={s.tab_container}>
-              <div className={s.tab_box}>
-                {['Today', 'Week', 'Month'].map((tab, index) => (
-                  <button
-                    key={tab}
-                    ref={(el) => tabRefs.current[index] = el}
-                    className={`${s.tab_button} ${activeTab === tab ? s.active : ''}`}
-                    onClick={() => setActiveTab(tab)}
-                  >
-                    {tab}
-                  </button>
-                ))}
-                <div className={s.line} style={lineStyle}></div>
-              </div>
-              <div className={s.content_box}>
-                <div className={`${s.tab_content} ${activeTab === 'Today' ? s.active : ''}`}>
-                  <h3>Today</h3>
-                  <div className={s.tab1_notice}>
-                    <p>There are no scheduled contents for today!</p>
-                  </div>
-                </div>
-
-                <div className={`${s.tab_content} ${activeTab === 'Week' ? s.active : ''}`}>
-                  <h3>Week</h3>
-                  <div className={s.tab1_notice}>
-                    <p><Link to="/calendar" className="a">End Of Season Sports Clearance Sale</Link></p>
-                    <p><small>Scheduled on 26th April 2024</small></p>
-                    <p><small><i>Platform: Instagram, Facebook</i></small></p>
-                  </div>
-                </div>
-
-                <div className={`${s.tab_content} ${activeTab === 'Month' ? s.active : ''}`}>
-                  <h3>Month</h3>
-                  <div className={s.tab1_notice}>
-                    <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
-                    <p><small>Scheduled on 26th April 2024</small></p>
-                    <p><small><i>Platform: Instagram, Facebook</i></small></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={s.my_posts}>
-          <div className={s.posts_content}>
-            <div className={s.posts_title}>
-              <p>My Posts</p>
-            </div>
-          </div>
-        </div>
-        <ToastContainer />
+        <button className={s.analytics_btn}>View more</button>
       </div >
+
+      <div className={s.scheduled_postings}>
+        <div className={s.scheduled_content}>
+          <div className={s.scheduled_title}>
+            <p>Scheduled Postings</p>
+          </div>
+          <div className={s.tab_container}>
+            <div className={s.tab_box}>
+              {['Today', 'Week', 'Month'].map((tab, index) => (
+                <button
+                  key={tab}
+                  ref={(el) => tabRefs.current[index] = el}
+                  className={`${s.tab_button} ${activeTab === tab ? s.active : ''}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+              <div className={s.line} style={lineStyle}></div>
+            </div>
+            <div className={s.content_box}>
+              <div className={`${s.tab_content} ${activeTab === 'Today' ? s.active : ''}`}>
+                <h3>Today</h3>
+                <div className={s.tab1_notice}>
+                  <p>There are no scheduled contents for today!</p>
+                </div>
+              </div>
+
+              <div className={`${s.tab_content} ${activeTab === 'Week' ? s.active : ''}`}>
+                <h3>Week</h3>
+                <div className={s.tab1_notice}>
+                  <p><Link to="/calendar" className="a">End Of Season Sports Clearance Sale</Link></p>
+                  <p><small>Scheduled on 26th April 2024</small></p>
+                  <p><small><i>Platform: Instagram, Facebook</i></small></p>
+                </div>
+              </div>
+
+              <div className={`${s.tab_content} ${activeTab === 'Month' ? s.active : ''}`}>
+                <h3>Month</h3>
+                <div className={s.tab1_notice}>
+                  <p><Link to="/calendar">End Of Season Sports Clearance Sale</Link></p>
+                  <p><small>Scheduled on 26th April 2024</small></p>
+                  <p><small><i>Platform: Instagram, Facebook</i></small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={s.my_posts}>
+        <div className={s.posts_content}>
+          <div className={s.posts_title}>
+            <p>My Posts</p>
+          </div>
+        </div>
+      </div>
+      <ToastContainer />
     </Layout>
   );
 };

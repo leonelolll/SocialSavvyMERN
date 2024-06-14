@@ -26,9 +26,9 @@ function Navbar() {
             <div className={s.dropdown}>
                 <button className={s.dropbtn}>Help  &#11206;</button>
                 <div className={s.dropdown_content}>
-                    <Link to="faq.html" className={s.a}>FAQ</Link>
-                    <Link to="feedback.html" className={s.a}>Feedback</Link>
-                    <Link to="helpdesk.html" className={s.a}>Help Desk</Link>
+                    <Link to="/faq" className={s.a}>FAQ</Link>
+                    <Link to="/feedback" className={s.a}>Feedback</Link>
+                    <Link to="/helpdesk" className={s.a}>Help Desk</Link>
                 </div>
             </div>
             <div className={s.right}>
@@ -41,7 +41,7 @@ function Navbar() {
                         <h4 className={s.name}>user</h4>
                         <p className={s.email}>{currentUser.email}</p>
                     </Link>
-                    <Link to="edit-profile.html">Edit Profile</Link>
+                    <Link to="/settings">Edit Profile</Link>
                     <button className={s.logoutbtn} onClick={confirmLogout}>Log Out</button>
                 </div>
             </div>

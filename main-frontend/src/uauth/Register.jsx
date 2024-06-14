@@ -94,7 +94,10 @@ function Register() {
                     <section className={s.copy}>
                         <h2>Create your account</h2>
                         <div className={s.signup_container}>
-                            <p>Already have an account? <Link to="/login"><strong>Log in</strong></Link></p>
+                            <p>
+                                Already have an account?
+                                <Link to="/login" className="link_to_login"><strong> Log in</strong></Link>
+                            </p>
                         </div>
                         <button type="button" onClick={handleGoogleClick} className={s.signup_w_google_btn}>
                             Sign up with Google
@@ -149,11 +152,11 @@ function Register() {
                     </button>
                     <div className={s.input_container.cta}>
                         <label className={s.checkbox_container}>
-                            <input type={s.checkbox} />
+                            <input type="checkbox" />
                             <span className={s.r_checkmark}></span>
                             <p><small>By creating an account, I agree to accept SocialSavvy's
-                                <Link to="https://docs.google.com/document/d/1KazYjy9XokNkQurNVBNj1duowDUW72UF6RFD8bKt5W0/edit?usp=sharing"> Privacy Policy </Link>
-                                and <Link to="https://docs.google.com/document/d/1RDBvwhP1bWuuPkI6fRsvOu6x872QvEK9uY75jLUjmUw/edit?usp=sharing">Terms of Service</Link>.</small></p>
+                                <Link to="https://docs.google.com/document/d/1KazYjy9XokNkQurNVBNj1duowDUW72UF6RFD8bKt5W0/edit?usp=sharing" className={s.checkmark_link}> Privacy Policy </Link>
+                                and <Link to="https://docs.google.com/document/d/1RDBvwhP1bWuuPkI6fRsvOu6x872QvEK9uY75jLUjmUw/edit?usp=sharing" className={s.checkmark_link}>Terms of Service</Link>.</small></p>
                         </label>
                     </div>
                 </form>

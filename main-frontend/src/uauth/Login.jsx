@@ -51,35 +51,39 @@ function Login() {
 
   const handleGoogleClick = async () => {
     try {
-        const provider = new GoogleAuthProvider();
-        const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
 
-        const result = await signInWithPopup(auth, provider);
-        const res = await fetch("/main-backend/auth/google", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: result.user.displayName,
-                email: result.user.email,
-                photo: result.user.photoURL,
-            }),
-        });
-        const data = await res.json();
-        dispatch(signInSuccess(data));
-        navigate("/dashboard");
+      const result = await signInWithPopup(auth, provider);
+      const res = await fetch("/main-backend/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
+        }),
+      });
+      const data = await res.json();
+      dispatch(signInSuccess(data));
+      navigate("/dashboard");
     } catch (error) {
-        console.log("Could not login with Google", error)
+      console.log("Could not login with Google", error)
     }
-}
+  };
+
+  // const handleForgetPassword = async () => {
+
+  // };
 
   return (
     <div className={s.split_screen}>
       <div className={s.left}>
         <section className={s.copy}>
           <div className={s.logo}>
-          <img src={logo} alt="SocialSavvy" />
+            <img src={logo} alt="SocialSavvy" />
           </div>
           <h1>Simplify, Create,<br />Join Us!</h1>
           <svg width="203" height="1">
@@ -121,12 +125,12 @@ function Login() {
           </button>
           <div className={s.input_container.cta}>
             <label className={s.checkbox_container}>
-              <input type={s.checkbox}/>
+              <input type="checkbox" />
               <span className={s.l_checkmark}></span>
               <small>Remember me</small>
             </label>
             <div className={s.forgot_password}>
-              <p><small><Link to="/forgetpass">Forgot password?</Link></small></p>
+              <p><small><Link to="/forgetpass" >Forgot password?</Link></small></p>
             </div>
           </div>
           <button type="button" onClick={handleGoogleClick} className={s.signup_w_google_btn}>

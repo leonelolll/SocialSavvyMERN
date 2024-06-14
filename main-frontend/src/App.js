@@ -7,7 +7,6 @@ import Landing from './landing/Landing.jsx'
 import Register from './uauth/Register.jsx'
 import Login from './uauth/Login.jsx'
 import ForgetPass from './uauth/ForgetPass.jsx'
-import OTPVerif from './uauth/OTPVerif.jsx'
 import Dashboard from './dashboard/Dashboard.jsx'
 import Post from './PostsPage/Post';
 import CreatePost from './CreatePostPage/CreatePost.jsx';
@@ -15,6 +14,8 @@ import Calendar from './CalendarPage/Calendar.jsx';
 import ContentAnalysis from './ContentAnalysis/ContentAnalysis.jsx';
 // import Layout from './shared/Layout.jsx'
 import { Routes, Route } from 'react-router-dom'
+import Settings from "./settings/Settings.jsx"
+import ResetPass from "./uauth/ResetPassword.jsx"
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
       <Route path='/forgetpass' element={<ForgetPass />} />
-      <Route path='/otpverif' element={<OTPVerif />} />
+      <Route path='/resetpass/:token' element={<ResetPass />} />
       <Route path='/dashboard' element={<Dashboard />} />
       <Route path='/analysis.html' element={<Analysis />} />
       <Route path='/post' element={<Post />} />
@@ -35,6 +36,7 @@ function App() {
       <Route path='/faq' element={<FAQ />} />
       <Route path='/helpdesk.html' element={<Helpdesk />} />
       <Route path='/feedback.html' element={<Feedback />} />
+      <Route path='/settings' element={<Settings />} />
     </Routes>
   );
 }

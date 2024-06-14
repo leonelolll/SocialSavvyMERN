@@ -97,6 +97,18 @@ a:hover{
     margin-top: -5px;
 }
 
+.signup_container .link_to_login{
+    display: inline;
+}
+
+.signup_container p{
+    display: flex;
+    text-align: center;
+    gap: 0.5em;
+    position: relative;
+    left: 50px;
+}
+
 .login_container{
     margin-bottom: 20px;
     margin-top: -5px;
@@ -199,7 +211,6 @@ form input[type="number"] {
 }
 
 .forgot_password{
-    display: inline-block;
     margin-left: 0.5rem;
     font-size: 0.875rem;
     position: relative;
@@ -258,6 +269,10 @@ form input[type="number"] {
     left: 8px;
     top: 4px;
     transform: rotate(45deg);
+}
+
+.checkmark_link{
+    display: inline;
 }
 
 .signup_btn{
