@@ -13,13 +13,17 @@
   "license": "ISC",
   "description": "backend for SocialSavvyMERN",
   "dependencies": {
+    "@stripe/react-stripe-js": "github:stripe/react-stripe-js",
+    "@stripe/stripe-js": "^3.5.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "html2canvas": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.1",
     "mongodb": "^6.7.0",
     "mongoose": "^8.4.1",
     "node-cron": "^3.0.3",
@@ -28,6 +32,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-oauth2": "^1.8.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "stripe": "^15.11.0"
   }
 }
