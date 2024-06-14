@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../WIF2003 Project/WIF2003-socialsavvy"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "WIF2003-socialsavvy"
+	}
+}
