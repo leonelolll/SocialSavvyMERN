@@ -38,6 +38,7 @@ const Helpdesk = () => {
   };
 
   const deleteComplaint = async (ticketNo) => {
+    alert("Are you sure you want to delete this complaint?");
     await axios
       .delete(`http://localhost:4000/api/delete/complaint/${ticketNo}`)
       .then((response) => {
@@ -69,7 +70,7 @@ const Helpdesk = () => {
 
       fetchData();
       toast.success(response.data.message, { position: "top-center" });
-      navigate("http://localhost:3000/helpdesk");
+      navigate("/helpdesk");
       setShowAddComplaint(false);
     } catch (error) {
       console.log(error);
@@ -107,6 +108,7 @@ const Helpdesk = () => {
         if (emailResponse.status === 200) {
             console.log("Email sent successfully:", response.text);
             toast.success("Email sent successfully.", { position: "top-center" });
+            deleteComplaint(complaintId);
         } else {
             console.error("Error sending email:", response.text);
             toast.error("An error occurred while sending the email. Please try again later.", { position: "top-center" });

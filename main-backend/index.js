@@ -15,6 +15,11 @@ import feedbackRoute from './routes/feedbackRoute.js';
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import postsRouter from "./routes/posts.js";
+import planRouter  from "./routes/plan1Route.js";
+import receiptRouter from "./routes/receipt1Route.js";
+import stripe from 'stripe';
+const stripeInstance = stripe('sk_test_51POKtIKQg5ex9zFSEcmg9pRbYMXTNM77R8UYVAizd1IO76I2nj9T0U7AxPVeSaaZdgw80COEuzmdMg7tDgv6zE5f00DDPAGegt');
+
 //import postsRouter from "./routes/posts.js";
 
 // Configure environment variables
@@ -47,6 +52,8 @@ app.use("/api", feedbackRoute);
 app.use("/main-backend/user", userRoutes);
 app.use("/main-backend/auth", authRoutes);
 app.use("/", postsRouter);
+app.use('/api/plans', planRouter); 
+app.use('/api/receipts', receiptRouter);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'main-frontend', 'build')));
@@ -81,3 +88,36 @@ app.use((err, req, res, next) => {
         statusCode,
     });
 });
+
+//route to Stripe API
+app.post('/create-subscription', async (req, res) => {
+    const { priceId, customerEmail } = req.body;
+
+    try {
+        // Create a new customer if necessary
+        let customer = await stripeInstance.customers.list({ email: customerEmail, limit: 1 });
+        if (customer.data.length === 0) {
+            customer = await stripeInstance.customers.create({ email: customerEmail });
+        } else {
+            customer = customer.data[0];
+        }
+
+        // Create the Checkout session
+        const session = await stripeInstance.checkout.sessions.create({
+            payment_method_types: ['card'],
+            customer: customer.id,
+            line_items: [{
+                price: priceId,
+                quantity: 1,
+            }],
+            mode: 'subscription',
+            success_url: 'http://localhost:3000/payment',
+            cancel_url: 'http://localhost:3000/payment',
+        });
+
+        res.json({ id: session.id });
+    } catch (error) {
+        res.status(400).json({ error: { message: error.message } });
+    }
+});
+

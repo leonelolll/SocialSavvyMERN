@@ -13,6 +13,7 @@ import Post from './PostsPage/Post';
 import CreatePost from './CreatePostPage/CreatePost.jsx';
 import Calendar from './CalendarPage/Calendar.jsx';
 import ContentAnalysis from './ContentAnalysis/ContentAnalysis.jsx';
+import SubscriptionPage from './SubscriptionFolder/SubscriptionPage.js';
 // import Layout from './shared/Layout.jsx'
 import { Routes, Route } from 'react-router-dom'
 
@@ -40,6 +41,7 @@ function App() {
       <Route path='/dashboard/faq' element={<FAQ />} />
       <Route path='/dashboard/helpdesk' element={<Helpdesk />} />
       <Route path='/dashboard/feedback' element={<Feedback />} />
+      <Route path="/payment" element={<SubscriptionPage />} />    
     </Routes>
   );
 }
