@@ -30,13 +30,13 @@ function Sidebar() {
                 <h2>socialsavvy</h2>
             </div>
             <ul className={s.menu}>
-                <li><Link to="http://localhost:3000/dashboard" class={s.a}><img src={dashboardsvg} alt="dashboard" /><p>Dashboard</p></Link></li>
-                <li><Link to="http://localhost:3000/post" class={s.a}><img src={postsvg} alt="post" /><p>Post</p></Link></li>
-                <li><Link to="http://localhost:3000/calendar" class={s.a}><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
-                <li ><Link to="http://localhost:3000/analysis" class={s.a}><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
-                <li><Link to="http://localhost:3000/ContentAnalysis" class={s.a}><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
-                <li><Link to="http://localhost:3000/payment.html" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
-                <li><Link to="http://localhost:3000/edit-profile.html" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
+                <li><Link to="/dashboard" class={s.a}><img src={dashboardsvg} alt="dashboard" /><p>Dashboard</p></Link></li>
+                <li><Link to="/post" class={s.a}><img src={postsvg} alt="post" /><p>Post</p></Link></li>
+                <li><Link to="/calendar" class={s.a}><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
+                <li ><Link to="/analysis" class={s.a}><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
+                <li><Link to="/ContentAnalysis" class={s.a}><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
+                <li><Link to="/payment" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
+                <li><Link to="/edit-profile" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
             </ul>
             <hr />
             <ul className={s.logout}>

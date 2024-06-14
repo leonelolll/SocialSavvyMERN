@@ -31,12 +31,12 @@ function SideNav() {
             </div>
             <ul className="menu">
                 <li><Link to="/dashboard" class="a"><img src={dashboardsvg} alt="dashboard" /><p>Dashboard</p></Link></li>
-                <li><Link to="post.html" class="a"><img src={postsvg} alt="post" /><p>Post</p></Link></li>
-                <li><Link to="calendar.html" class="a"><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
-                <li><Link to="analysis.html" class="a"><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
-                <li className='active'><Link to="ContentAnalysis.html" class="a"><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
-                <li><Link to="payment.html" class="a"><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
-                <li><Link to="edit-profile.html" class="a"><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
+                <li><Link to="/post" class="a"><img src={postsvg} alt="post" /><p>Post</p></Link></li>
+                <li><Link to="/calendar" class="a"><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
+                <li><Link to="/analysis" class="a"><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
+                <li className='active'><Link to="/ContentAnalysis" class="a"><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
+                <li><Link to="/payment" class="a"><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
+                <li><Link to="/edit-profile" class="a"><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
             </ul>
             <hr />
             <ul className="logout">
