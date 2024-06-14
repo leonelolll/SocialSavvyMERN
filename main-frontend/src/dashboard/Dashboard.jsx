@@ -20,21 +20,6 @@ function Dashboard() {
   const [lineStyle, setLineStyle] = useState({ width: 0, left: 0 });
   const tabRefs = useRef([]);
 
-  // useEffect(() => {
-  //   const loadScript = (src) => {
-  //     const script = document.createElement('script');
-  //     script.src = src;
-  //     script.async = true;
-  //     document.body.appendChild(script);
-  //   };
-
-  //   // Load external scripts
-  //   loadScript('https://cdn.jsdelivr.net/npm/chart.js');
-  //   loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js');
-  //   loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
-  // }, []);
-
-
   useEffect(() => {
     const verifyCookie = async () => {
       try {
@@ -101,16 +86,27 @@ function Dashboard() {
       [9, 5, 15, 12, 7, 16, 6, 18, 7, 11],
       [14, 7, 13, 8, 15, 5, 12, 7, 17, 9]
     ], ["#B98DC7", "lightgreen", "#A68AE6"]);
+
+    return () => {
+      // Clean up charts when component unmounts
+      destroyChart("Chart1");
+      destroyChart("Chart2");
+    };
   }, []);
 
 
-  function createChart(canvasId, chartType, dataValues, colors) {
-    const xValues = Array.from({ length: dataValues[0].length }, (_, i) => i + 1);
+  const createChart = (canvasId, chartType, dataValues, colors) => {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
 
-    new Chart(canvasId, {
+    // Destroy existing chart if it exists
+    destroyChart(canvasId);
+
+    // Create new chart
+    new Chart(ctx, {
       type: chartType,
       data: {
-        labels: xValues,
+        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
         datasets: dataValues.map((data, index) => ({
           label: ['Instagram', 'Facebook', 'TikTok'][index],
           data: data,
@@ -125,7 +121,17 @@ function Dashboard() {
         }
       }
     });
-  }
+  };
+
+  const destroyChart = (canvasId) => {
+    const canvas = document.getElementById(canvasId);
+    if (canvas) {
+      const chart = Chart.getChart(canvas);
+      if (chart) {
+        chart.destroy();
+      }
+    }
+  };
 
   const confirmLogout = () => {
     const confirmLogout = window.confirm("Are you sure you want to log out?");
@@ -187,7 +193,9 @@ function Dashboard() {
               <div className={s.payment_description}>
                 <p>Your next bill is for RM 29.99 on 23/04/2024</p>
               </div>
-              <button className={s.payment_btn}>View</button>
+              <Link to="/payment" className={s.a}>
+                <button className={s.payment_btn}>View</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -208,9 +216,11 @@ function Dashboard() {
               <canvas id="Chart2"></canvas> {/* Include the canvas element */}
             </div>
           </div>
-
+          <Link to="/analysis.html" className={s.a}>
+            <button className={s.analytics_btn}>View more</button>
+          </Link>
         </div >
-        <button className={s.analytics_btn}>View more</button>
+
       </div >
 
       <div className={s.scheduled_postings}>
