@@ -43,7 +43,7 @@ export const getAllComplaints = async(req, res) =>{
 export const getComplaintById = async(req, res) =>{
     try {
         const id = req.params.id;
-        const complaintExist = await User.findById(id);
+        const complaintExist = await Complaint.findById(id);
         if(!complaintExist){
             return res.status(404).json({message: "Complaint not found. "});
         }
@@ -68,4 +68,17 @@ export const deleteComplaint = async(req, res) =>{
     } catch (error) {
         res.status(500).json({ errorMessage: error.message});
     }
+};
+
+export const sendEmail = async(req, res) =>{
+    try {
+        const { emailData } = req.body;
+    
+        const info = await transporter.sendMail(emailData);
+        console.log("Email sent:", info.messageId);
+        res.json({ message: "Email sent successfully." });
+      } catch (error) {
+        console.error("Error sending email:", error);
+        res.status(500).json({ message: "Error sending email." });
+      }
 };

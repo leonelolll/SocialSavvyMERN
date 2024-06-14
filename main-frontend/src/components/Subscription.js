@@ -32,8 +32,8 @@ function Subscription() {
           throw new Error(`Failed to fetch receipt details: ${response.status}`);
         }
         const data = await response.json();
-        setSelectedReceipt(data); // Update selectedReceipt with the fetched details
-        console.log('Fetched receipt details:', data); // Log fetched data
+        setSelectedReceipt(data); 
+        console.log('Fetched receipt details:', data); 
       } catch (error) {
         console.error('Error fetching receipt details:', error);
       }
@@ -42,49 +42,58 @@ function Subscription() {
   };
   
   
-  const generatePDF = async (receiptNumber) => {
-    console.log(`Generating PDF for receipt number: ${receiptNumber}`);
+  const generatePDF = async (receiptNum) => {
+  console.log(`Generating PDF for receipt number: ${receiptNum}`);
+  
+  if (!receiptNum) {
+    console.error('Error: receiptNumber is undefined');
+    return;
+  }
+
+  try {
+    const response = await fetch(`http://localhost:4000/api/receipts/${receiptNum}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch receipt details: ${response.status}`);
+    }
+    const receipt = await response.json();
+    console.log('Fetched receipt details:', receipt);
     
-    if (!receiptNumber) {
-      console.error('Error: receiptNumber is undefined');
-      return;
+    
+    if (!receipt || typeof receipt !== 'object') {
+      throw new Error('Invalid receipt data received');
     }
-  
-    try {
-      const response = await fetch(`http://localhost:4000/receipts/${receiptNumber}`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch receipt details: ${response.status}`);
-      }
-      const receipt = await response.json();
-      console.log('Fetched receipt details:', receipt);
-  
-      // Create a temporary HTML element to render the receipt data
-      const receiptElement = document.createElement('div');
-      receiptElement.style.width = '210mm';  // A4 width
-      receiptElement.style.height = '297mm'; // A4 height
-      receiptElement.style.padding = '10mm'; // Padding for better readability
-      receiptElement.style.background = 'white'; // Background color for clarity
-      receiptElement.innerHTML = `
-        <h1>Receipt #${receipt.receiptNumber}</h1>
-        <p>Date: ${receipt.date}</p>
-        <p>Amount Paid: ${receipt.amountPaid}</p>
-        <!-- Add more fields as needed -->
-      `;
-  
-      document.body.appendChild(receiptElement); // Append to body to ensure it's in the DOM
-  
-      const canvas = await html2canvas(receiptElement);
-      const imgData = canvas.toDataURL('image/png');
-  
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, 'PNG', 0, 0);
-      pdf.save(`receipt_${receiptNumber}.pdf`);
-  
-      document.body.removeChild(receiptElement); // Clean up the temporary element
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    }
-  };
+
+   
+    const { receiptNumber, date, amountPaid } = receipt;
+
+    
+    const receiptElement = document.createElement('div');
+    receiptElement.style.width = '210mm';  
+    receiptElement.style.height = '297mm'; 
+    receiptElement.style.padding = '10mm'; 
+    receiptElement.style.background = 'white'; 
+    receiptElement.innerHTML = `
+      <h1>Receipt #${receiptNumber}</h1>
+      <p>Date: ${date}</p>
+      <p>Amount Paid: ${amountPaid}</p>
+      <!-- Add more fields as needed -->
+    `;
+
+    document.body.appendChild(receiptElement); // Append to body to ensure it's in the DOM
+
+    const canvas = await html2canvas(receiptElement);
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF();
+    pdf.addImage(imgData, 'PNG', 0, 0);
+    pdf.save(`receipt_${receiptNumber}.pdf`);
+
+    document.body.removeChild(receiptElement); // Clean up the temporary element
+  } catch (error) {
+    console.error('Error generating PDF:', error);
+  }
+};
+
   
 
   const handleCloseModal = () => {
@@ -99,7 +108,7 @@ const handlePlanChange = (event) => {
 
 const fetchPlans = async () => {
   try {
-    const response = await fetch('http://localhost:4000/plans');
+    const response = await fetch('http://localhost:4000/api/plans'); // Updated path
     if (!response.ok) {
       throw new Error(`Failed to fetch plans: ${response.status}`);
     }
@@ -113,17 +122,18 @@ const fetchPlans = async () => {
 
 const fetchReceipts = async () => {
   try {
-    const response = await fetch('http://localhost:4000/receipts');
+    const response = await fetch('http://localhost:4000/api/receipts');
     if (!response.ok) {
       throw new Error(`Failed to fetch receipts: ${response.status}`);
     }
     const data = await response.json();
     console.log('Fetched receipts:', data);
-    setReceipts(data);  // Assuming data.receipts is an array of receipt objects
+    setReceipts(data);  // Assuming data is already an array of receipt objects
   } catch (error) {
     console.error('Error fetching receipts:', error);
   }
 };
+
 
 
 
@@ -202,7 +212,7 @@ const handleUpdateClick = async () => {
       const response = await fetch('http://localhost:4000/cancel-subscription', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ customerEmail: 'sofea@gmail.com' }), // Ensure this is the correct email
+        body: JSON.stringify({ customerEmail: 'sofea@gmail.com' }), 
       });
 
       if (response.ok) {
@@ -223,32 +233,7 @@ const handleUpdateClick = async () => {
         <div className="heading-container">
           <h3>Your Current Subscription Plan</h3>
           <h2>Premium</h2> 
-        </div>
-      </div>
-
-      <div className="form-container">
-        <div className="payment-form">
-          <form id="paymentForm" onSubmit={handleFormSubmission}>
-            <div className="form-group">
-              <label htmlFor="cardNumber">Card Number*</label>
-              <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="cardHolder">Card Holder*</label>
-              <input type="text" id="cardHolder" name="cardHolder" placeholder="John Doe" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="expDate">Expiration Date*</label>
-              <input type="text" id="expDate" name="expDate" placeholder="MM/YY" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="cvv">CVV*</label>
-              <input type="text" id="cvv" name="cvv" placeholder="123" required />
-            </div>
-            <div className="form-group">
-              <input type="submit" value="Update Card Information" />
-            </div>
-          </form>
+          
         </div>
       </div>
 
@@ -260,7 +245,7 @@ const handleUpdateClick = async () => {
               <th>Receipt Number</th>
               <th>Date</th>
               <th>Amount Paid</th>
-              <th>Receipt</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>{receipts.map((receipt) => {
@@ -270,14 +255,13 @@ const handleUpdateClick = async () => {
       <td>{receipt.receiptNumber}</td>
       <td>{receipt.date}</td>
       <td>{receipt.amountPaid}</td>
-      <td className="buttonContainer">
-        {/* Button with onClick handler */}
+      {/* <td className="buttonContainer">
         <button
           type="button"
           onClick={() => generatePDF(receipt.receiptNumber)}>
           Generate PDF
-        </button>
-      </td>
+        </button> 
+      </td> */}
     </tr>
   );
 })}
@@ -326,7 +310,7 @@ const handleUpdateClick = async () => {
 
     <div className="subscription-actions">
       <button id="upgradeSubscription" onClick={() => toggleModal('upgradeModal', true)}>Upgrade Subscription</button>
-      <button id="cancelSubscription" onClick={() => toggleModal('cancelModal', true)}>Cancel Subscription</button>
+      {/* <button id="cancelSubscription" onClick={() => toggleModal('cancelModal', true)}>Cancel Subscription</button> */}
     </div>
 
       {modalVisible.confirmationModal && (
@@ -402,6 +386,8 @@ const handleUpdateClick = async () => {
         textDecoration: 'none',
         fontFamily: "'Inter', sans-serif",
         position: 'absolute',
+        right: '10px', 
+        top: '10px',
     }}
 >
   Pay Now 

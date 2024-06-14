@@ -4,6 +4,7 @@ const feedbackSchema = new mongoose.Schema({
     image:{
         type: String,
         required : true,
+        default : "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
     },
     name:{
         type : String,

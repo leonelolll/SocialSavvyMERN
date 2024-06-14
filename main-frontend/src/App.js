@@ -1,4 +1,4 @@
-import FAQ from "./faq/faq.js"
+import FAQ from "./faq/faq.jsx"
 import Helpdesk from "./helpdesk/Helpdesk.js"
 import Feedback from "./feedback/feedback.jsx"
 import Analysis from "./analysisPage/Analysis"
@@ -12,6 +12,7 @@ import Post from './PostsPage/Post';
 import CreatePost from './CreatePostPage/CreatePost.jsx';
 import Calendar from './CalendarPage/Calendar.jsx';
 import ContentAnalysis from './ContentAnalysis/ContentAnalysis.jsx';
+import SubscriptionPage from './SubscriptionFolder/SubscriptionPage.js';
 // import Layout from './shared/Layout.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Settings from "./settings/Settings.jsx"
@@ -21,6 +22,11 @@ import ResetPass from "./uauth/ResetPassword.jsx"
 function App() {
   return (
     <Routes>
+      
+      <Route path='/analysis' element={<Analysis/>}/>
+      <Route path='/faq' element = {<FAQ/>}/>
+      <Route path='/helpdesk' element = {<Helpdesk/>}/>
+      <Route path='/feedback' element = {<Feedback/>}/>
       <Route path='/' element={<Landing />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
@@ -33,10 +39,11 @@ function App() {
       <Route path='/calendar' element={<Calendar />} />
       <Route path='/ContentAnalysis' element={<ContentAnalysis />} />
       <Route path='/analysis' element={<Analysis />} />
-      <Route path='/faq' element={<FAQ />} />
-      <Route path='/helpdesk.html' element={<Helpdesk />} />
-      <Route path='/feedback.html' element={<Feedback />} />
+      <Route path='/dashboard/faq' element={<FAQ />} />
+      <Route path='/dashboard/helpdesk' element={<Helpdesk />} />
+      <Route path='/dashboard/feedback' element={<Feedback />} />
       <Route path='/settings' element={<Settings />} />
+      <Route path="/payment" element={<SubscriptionPage />} />    
     </Routes>
   );
 }

@@ -1,20 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import logo from '../assets/images/logo.png';
+import dashboardIcon from '../assets/images/dashboard.svg';
+import postIcon from '../assets/images/post.svg';
+import calendarIcon from '../assets/images/calendar.svg';
+import analysisIcon from '../assets/images/analysis.svg';
+import flameIcon from '../assets/images/flame.svg';
+import paymentIcon from '../assets/images/payment-methods.svg';
+import settingsIcon from '../assets/images/settings.svg';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Select from 'react-select';
 import './createpost.css';
 import { BlobServiceClient } from '@azure/storage-blob';
+import UserPic from '../assets/images/user.png';
+import Media from '../assets/images/previewimage.jpg';
+import axios from 'axios';
+
 
 function CreatePost() {
   const [platforms, setPlatforms] = useState([]);
   const [title, setTitle] = useState('');
   const [caption, setCaption] = useState('');
-  const [media, setMedia] = useState('../images/previewimage.jpg');
+  const [media, setMedia] = useState(Media);
   const [mediaType, setMediaType] = useState('image'); // Added state for media type
   const [postType, setPostType] = useState('now');
   const [scheduleTime, setScheduleTime] = useState('');
   const [url, setUrl] = useState('');
   const [selectedPlatforms, setSelectedPlatforms] = useState([]); // State for selected platforms
+  const [selectedDraft, setSelectedDraft] = useState("");
   const [file, setFile] = useState(null);
+  //const [text, setText] = useState('');
+  const [correctText, setCorrectText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showCorrectedText, setShowCorrectedText] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const [isCorrectedTextApplied, setIsCorrectedTextApplied] = useState(false);
+
+
 
   // Function to handle platform selection
   const handlePlatformChange = (selectedOptions) => {
@@ -86,13 +108,17 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
   };
 
   //fetch from user linked social media
-  const options = [
+  const platformsOptions = [
     { label: "Facebook", value: "facebook" },
     { label: "Instagram", value: "instagram" },
     { label: "Twitter", value: "twitter" },
     { label: "Linkedin", value: "linkedin" },
     ];
     
+  const draftsOptions = [
+    { label: "Sale", value: "sale"}
+  ];
+
     const handlePostClick = async (event) => {
       event.preventDefault();
       console.log("post clicked");
@@ -149,13 +175,93 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
       }
     };
     
+    const confirmLogout = () => {
+      const confirmLogout = window.confirm('Are you sure you want to log out?');
+      if (confirmLogout) {
+        window.location.href = 'login.html';
+      }
+    };
+
+    //const setText = (correctedText) => {
+      //setCaption(correctedText);
+    //};
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setError(null);
+      setShowCorrectedText(false);
+    
+      try {
+        const response = await axios.post('http://localhost:5000/chat', { text: caption });
+        const correctedText = response.data;
+        setCorrectText(correctedText);
+        setShowCorrectedText(true);
+        setIsCorrectedTextApplied(true);
+        //setText(correctedText);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+      setButtonVisible(false);
+
+    };
     
     return (
       <div>
-      
+      <div className="side-nav">
+      <div className="logo">
+        <img src={logo} className="user-img" alt="Logo" />
+        <h2>socialsavvy</h2>
+      </div>
+      <ul className="menu">
+        <li><a className='a' href="http://localhost:3000/dashboard"><img src={dashboardIcon} alt="Dashboard" /><p>Dashboard</p></a></li>
+        <li className="active"><a className='a' href="http://localhost:3000/post"><img src={postIcon} alt="Post" /><p>Post</p></a></li>
+        <li><a className='a' href="http://localhost:3000/calendar"><img src={calendarIcon} alt="Calendar" /><p>Calendar</p></a></li>
+        <li><a className='a' href="http://localhost:3000/analysis"><img src={analysisIcon} alt="Analysis" /><p>Analysis</p></a></li>
+        <li><a className='a' href="http://localhost:3000/ContentAnalysis"><img src={flameIcon} alt="Viral Content" /><p>Viral Content</p></a></li>
+        <li><a className='a' href="http://localhost:3000/subscriptions"><img src={paymentIcon} alt="Subscription" /><p>Subscription</p></a></li>
+        <li><a className='a' href="http://localhost:3000/settings"><img src={settingsIcon} alt="Settings" /><p>Settings</p></a></li>
+      </ul>
+      <hr />
+      <ul className="logout">
+        <li><p>Logout</p></li>
+      </ul>
+      </div>
+
+      <div className="background">
+
+      <div className="top">
+              <div className="dropdown">
+                  <button className="dropbtn">
+                  Help &#11206;
+                  </button>
+                  <div className="dropdown-content">
+                  <a href="http://localhost:3000/faq">FAQ</a>
+                  <a href="http://localhost:3000/feedback">Feedback</a>
+                  <a href="http://localhost:3000/helpdesk">Help Desk</a>
+                  </div>
+              </div>
+              <div className="right">
+                  <button className="rightbtn">
+                  &#11206; Hi, user
+                  <img src={UserPic} alt="User" />
+                  </button>
+                  <div className="right-content">
+                  <a href="profile.html">
+                      <h4 className="name">user</h4>
+                      <p className="email">user@gmail.com</p>
+                  </a>
+                  <a href="edit-profile.html">Edit Profile</a>
+                  <a href="#" onClick={confirmLogout}>Log Out</a>
+                  </div>
+              </div>
+          </div>
+
         <div className="container">
           <h2>Create New Post</h2>
-          <div className="row">
+          <div className="createpost-row">
             <div className="column">
               <div className="preview-button">
                 <div className="text">Preview:</div>
@@ -167,8 +273,8 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                 <div className="preview-post">
 
                   <div className="profile">
-                    <img src="../images/user.png" alt="User" />
-                    <p className="username">username</p>
+                    <img src={UserPic} alt="User" />
+                    <p className="username-createpost">username</p>
                   </div>
 
                   <div id="content-media">
@@ -191,9 +297,17 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
             </div>
 
             <div className="edit-content">
-              <form><label htmlFor="platform" className="label-choose-platform">Publish to:</label><br />
+              <form>
+                <label htmlFor="platform" className="label-choose-draft">Draft:</label><br />
               <Select
-                options={options}
+                options={draftsOptions}
+                isMulti={false}
+                value={selectedDraft}
+                onChange={handlePlatformChange}
+              /><br />
+                <label htmlFor="platform" className="label-choose-platform">Publish to:</label><br />
+              <Select
+                options={platformsOptions}
                 isMulti={true}
                 value={selectedPlatforms}
                 onChange={handlePlatformChange}
@@ -201,10 +315,30 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                 <label htmlFor="title">Content Title: </label>
                 <input type="text" name="title" id="content-title" onChange={e => setTitle(e.target.value)}/>
                 <fieldset>
-                  <legend className="content">Content</legend>
                   <div>
                     <label htmlFor="input-caption" className="label-input-caption">Caption:</label><br />
-                    <textarea id="input-caption" title="input-caption" rows="5" value={caption} onChange={e => setCaption(e.target.value)} /><br />
+                    <textarea id="input-caption" title="input-caption" rows="5" 
+                    value={caption} onChange={e => setCaption(e.target.value)} />
+                    <button onClick={handleSubmit} disabled={isLoading} style={{ display: buttonVisible ? "block" : "none" }}>
+                    {/*spell checker*/}
+                    {isLoading ? 'Correcting...' : 'Correct Text'}
+                  </button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                  {showCorrectedText && (
+                  <div className="corrected-text-container">
+                    <h5>Corrected Text:</h5>
+                    <p>{correctText}</p>
+                    <button
+                      onClick={() => {
+                        setCaption(correctText);
+                        setShowCorrectedText(false);
+                      }}
+                    >
+                      Apply Changes
+                    </button>
+                  </div>
+                )}
+                    <br />
                   </div>
                   <div>
                     <label htmlFor="add-media" className="label-add-media">Media</label><br />
@@ -226,6 +360,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                   <div className="postType">
                     <label htmlFor="post-type">Select post type:</label>
                     <select id="post-type" value={postType} onChange={e => setPostType(e.target.value)}>
+                      <option value="draft">Save as Draft</option>
                       <option value="now">Post Now</option>
                       <option value="schedule">Schedule Post</option>
                     </select>
@@ -242,6 +377,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
             </div>
           </div>
         </div>
+      </div>
       </div>
   );
 }

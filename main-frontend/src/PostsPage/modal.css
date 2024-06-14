@@ -12,16 +12,26 @@
     z-index: 1000;
   }
   
-  .modal-content {
+  .modal-post-content {
     background: white;
     padding: 20px;
     border-radius: 8px;
     position: relative;
     max-width: 500px;
     width: 100%;
-    text-align: center;
+    text-align: start;
     width: fit-content;
   }
+
+  .post-details-modal {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .post-details-modal div{
+    margin: 10px;
+  }
+  
   
   .close-button {
     position: absolute;
@@ -51,5 +61,13 @@
   
   .modal-post-details {
     margin-top: 10px;
+    align-items: start;
+    margin-left: 0;
   }
+  .modal-post-details p{
+    margin-bottom: 0;
+    margin-left: 10px;
+  }
+  
+
   

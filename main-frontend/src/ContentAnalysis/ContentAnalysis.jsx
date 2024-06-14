@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './reset.css';
 import './ContentAnalysis.css';
 import SideNav from './SideNav';
 import Top from './Top';
@@ -21,20 +22,38 @@ function ContentAnalysis() {
     const [selectedPlatform, setSelectedPlatform] = useState('Instagram');
 
     useEffect(() => {
-        // Fetch data from result.json when the component mounts
-        fetch('/fetch/result.json')
-            .then(response => response.json())
-            .then(data => {
+        const fetchData = async () => {
+            console.log(selectedPlatform);
+            let platformFile;
+            switch (selectedPlatform) {
+                case 'Tiktok':
+                    platformFile = '/fetch/tiktok.json';
+                    break;
+                case 'Facebook':
+                    platformFile = '/fetch/facebook.json';
+                    break;
+                default:
+                    platformFile = '/fetch/result.json'; // Default to Instagram
+            }
+    
+            try {
+                console.log(platformFile);
+                const response = await fetch(platformFile);
+                const data = await response.json();
                 const formattedPosts = data.map((post) => ({
                     ...post,
-                    likes: nFormatter(post.likes),
-                    views: nFormatter(post.views),
-                    comments: nFormatter(post.comments),
+                    likes: post.likesCount,
+                    //views: nFormatter(post.viewsCount),
+                    comments: post.commentsCount,
                 }));
                 setPosts(formattedPosts);
-            })
-            .catch(error => console.error('Error fetching posts:', error));
-    }, []);
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
+        };
+    
+        fetchData();
+    }, [selectedPlatform]);
 
     const confirmLogout = () => {
         const confirmLogout = window.confirm('Are you sure you want to log out?');
@@ -82,7 +101,7 @@ function ContentAnalysis() {
         setMaxDate('');
     };
 
-    const handleViewButtonClick = () => {
+    /*const handleViewButtonClick = () => {
         const selectedRadio = document.querySelector('input[name="radio"]:checked');
         if (!selectedRadio) {
             console.log('No radio button is checked!');
@@ -94,7 +113,7 @@ function ContentAnalysis() {
         if (confirmMsg) {
             window.open(`https://${platform.toLowerCase()}.com`, '_blank');
         }
-    };
+    };*/
 
     const nFormatter = (num) => {
         if (num >= 1000000000) {
@@ -110,28 +129,29 @@ function ContentAnalysis() {
     };
 
     const handleSortFilterSubmit = () => {
-        alert('filter applied!');
-
+        // Sort the posts based on the selected sorting criteria
         let sortedPosts = [...posts];
-        if (sortBy === 'views') {
-            sortedPosts.sort((a, b) => extractNumericValue(b.views) - extractNumericValue(a.views));
-        } else if (sortBy === 'likes') {
+        //if (sortBy === 'views') {
+          //  sortedPosts.sort((a, b) => extractNumericValue(b.views) - extractNumericValue(a.views));
+        if (sortBy === 'likes') {
             sortedPosts.sort((a, b) => extractNumericValue(b.likes) - extractNumericValue(a.likes));
         } else if (sortBy === 'comments') {
             sortedPosts.sort((a, b) => extractNumericValue(b.comments) - extractNumericValue(a.comments));
         }
-
+    
+        // Filter the posts based on the selected date range
         const minDateObj = new Date(minDate || '2000-01-01');
         const maxDateObj = new Date(maxDate || '2024-12-31');
-
         sortedPosts = sortedPosts.filter((post) => {
             const postDate = new Date(post.date);
             return postDate >= minDateObj && postDate <= maxDateObj;
         });
-
+    
+        // Update the state with the sorted and filtered posts
         setPosts(sortedPosts);
-        setSortFilterVisible(false);
+        setSortFilterVisible(false); // Hide the sort filter UI after submission
     };
+    
 
     const extractNumericValue = (str) => {
         const numericPart = str.replace(/[^\d.]/g, '');
@@ -209,7 +229,7 @@ function ContentAnalysis() {
                             <img src={sortIcon} alt="Sort" />
                             <p>sort & filter</p>
                             <button className="sort-button" id="sortbtn" onClick={toggleSortFilter}>
-                                <img src="images/down.svg" alt="Dropdown" />
+                                <img src={downIcon} />
                             </button>
                         </li>
                         
