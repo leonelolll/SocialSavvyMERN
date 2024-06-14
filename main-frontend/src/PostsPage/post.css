@@ -345,6 +345,7 @@ nav{
     align-items: center;
 }
 
+
 .username {
   display: flex;
   align-items: center;
@@ -402,3 +403,32 @@ nav{
   align-self: start;
 }
 
+.edit-modal{
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 50%;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 8px rgba(0,0,0,1);
+    align-items: center;
+}
+
+.edit-modal-content span {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0;
+  padding-top: 0;
+
+}
+
+.post p{
+  align-self: start;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
