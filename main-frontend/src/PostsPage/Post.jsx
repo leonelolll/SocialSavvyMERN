@@ -46,7 +46,7 @@ const Filter = ({ platforms, selectedPlatform, onPlatformChange, selectedTimefra
   </div>
 );
 
-const Post = ({ post, onClick, onDelete, virality }) => (
+const Post = ({ post, onClick, onDelete, onEdit, virality }) => (
   <div className="post" >
     <div className="username">
       <div className="circle"></div>
@@ -56,7 +56,7 @@ const Post = ({ post, onClick, onDelete, virality }) => (
                   &#8230;
                   </button>
                   <div className="dropdown-post-content">
-                  <button  >Edit</button>
+                  <button onClick={() => onEdit(post)} >Edit</button>
                   <button onClick={() => onDelete(post._id)}>Delete</button> {/* Delete button */}
                   </div>
               </div>
@@ -91,13 +91,15 @@ const Post = ({ post, onClick, onDelete, virality }) => (
         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
       </div>
     </div>
+    <p><strong>Username</strong> {post.Caption}</p>
+            <p>Platforms: {post.PlatformName}</p>
   </div>
 );
 
-const PostList = ({ posts, onPostClick, onDelete, viralPercentage }) => (
+const PostList = ({ posts, onPostClick, onDelete, onEditClick, viralPercentage }) => (
   <div className="post-list">
     {posts.map((post, index) => (
-      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} virality={viralPercentage} />
+      <Post key={index} post={post} onClick={onPostClick} onDelete={onDelete} onEdit={onEditClick} virality={viralPercentage} />
     ))}
   </div>
 );
@@ -107,6 +109,10 @@ const PostPage = () => {
   const [selectedPlatform, setSelectedPlatform] = useState('');
   const [selectedTimeframe, setSelectedTimeframe] = useState('');
   const [modalPost, setModalPost] = useState(null);
+  const [editCaption, setEditCaption] = useState('');
+  const [showEdit, setShowEdit] = useState(false);
+  const [editPost, setEditPost] = useState(null);
+
   const platforms = ['Twitter', 'Instagram', 'Facebook', 'Tiktok'];
 
   //fetch post from mongodb
@@ -191,6 +197,34 @@ const PostPage = () => {
     }
   };
 
+  // Function to edit a post
+  const handleEditPost = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedPost = { ...editPost, caption: editCaption };
+      const response = await fetch(`http://localhost:4000/posts/${editPost._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedPost),
+      });
+      const updatedPostData = await response.json();
+      setPostedPosts(postedPosts.map(post => post._id === editPost._id ? updatedPostData : post));
+      setShowEdit(false); // Close edit modal
+    } catch (error) {
+      console.error('Error updating post:', error);
+    }
+  };
+  
+  const handleEditClick = (post) => {
+    setEditPost(post);
+    setShowEdit(!showEdit);
+    setEditCaption(post.Caption); // Set current caption to state
+  };
+
+  const toggleEdit = () => {
+    setShowEdit(!showEdit);
+  }
+
   // Function to handle click on a post
   const handlePostClick = (post) => {
     setModalPost(post);
@@ -250,9 +284,9 @@ const PostPage = () => {
                   Help &#11206;
                   </button>
                   <div className="dropdown-content">
-                  <a href="faq.html">FAQ</a>
-                  <a href="feedback.html">Feedback</a>
-                  <a href="helpdesk.html">Help Desk</a>
+                  <a href="http://localhost:3000/faq">FAQ</a>
+                  <a href="http://localhost:3000feedback">Feedback</a>
+                  <a href="http://localhost:3000/helpdesk">Help Desk</a>
                   </div>
               </div>
               <div className="right">
@@ -266,7 +300,7 @@ const PostPage = () => {
                       <p className="email">user@gmail.com</p>
                   </a>
                   <a href="edit-profile.html">Edit Profile</a>
-                  <a href="#" onClick={confirmLogout}>Log Out</a>
+                  <a href="http://localhost:3000/login" onClick={confirmLogout}>Log Out</a>
                   </div>
               </div>
           </div>
@@ -286,7 +320,7 @@ const PostPage = () => {
                 />
                 <button onClick={() => window.location.href='/post/createpost'} className="add-post-button">Add New Post</button>
               </div>
-              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost} viral={calculateViralPercentage} />
+              <PostList posts={filteredPosts} onPostClick={handlePostClick} onDelete={handleDeletePost}  onEditClick={handleEditClick} viral={calculateViralPercentage} />
             </div>
           </div>
           {modalPost && (
@@ -296,6 +330,33 @@ const PostPage = () => {
               post={modalPost} 
               sasToken={sasToken} 
             />
+          )}
+          
+          {showEdit && (
+            <div className="edit-modal">
+              <span className="close" onClick={toggleEdit}>×</span>
+              <div className="edit-modal-content">
+                <h5>Edit Caption</h5>
+                <form className="addComplaintForm" onSubmit={handleEditPost}>
+                  <div className="inputGroup">
+                    <label htmlFor="edit-caption">Caption:</label><br />
+                    <textarea
+                      id="edit-caption"
+                      name="edit-caption"
+                      value={editCaption} // Bind to state
+                      onChange={(e) => setEditCaption(e.target.value)} // Update state on change
+                      autoComplete="off"
+                      required
+                    />
+                  </div>
+                  <div className="inputGroup">
+                    <button type="submit" className="btn btn-outline-secondary p-1" style={{ width: "80px" }}>
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           )}
         </div>
       </div>  

@@ -27,6 +27,10 @@
     display: flex;
     flex-direction: row;
   }
+
+  .post-details-modal div{
+    margin: 10px;
+  }
   
   
   .close-button {
@@ -62,6 +66,7 @@
   }
   .modal-post-details p{
     margin-bottom: 0;
+    margin-left: 10px;
   }
   
 
