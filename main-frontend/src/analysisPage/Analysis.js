@@ -1,9 +1,8 @@
 import Content from "../analysisComponents/engagement";
-import SideBar from "../analysisComponents/sidebar";
-import TopBar from "../analysisComponents/topbar";
 import React, { useEffect } from 'react';
 import '../App.css';
 import './analysis.css'
+import Layout from "../shared/Layout.jsx";
 
 export default function Analysis(){
       
@@ -25,9 +24,8 @@ export default function Analysis(){
 
     return(
         <div>
-            <SideBar />
+          <Layout/>
             <div className="background">
-                <TopBar />
                 <Content />
             </div>
         </div>
