@@ -47,7 +47,7 @@ const Filter = ({ platforms, selectedPlatform, onPlatformChange, selectedTimefra
 );
 
 const Post = ({ post, onClick, onDelete, onEdit, virality }) => (
-  <div className="post" >
+  <div className="post-item" >
     <div className="username">
       <div className="circle"></div>
       <p>username</p>

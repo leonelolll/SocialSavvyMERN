@@ -33,17 +33,17 @@ function App() {
       <Route path='/forgetpass' element={<ForgetPass />} />
       <Route path='/resetpass/:token' element={<ResetPass />} />
       <Route path='/dashboard' element={<Dashboard />} />
-      <Route path='/analysis.html' element={<Analysis />} />
+      <Route path='/analysis' element={<Analysis />} />
       <Route path='/post' element={<Post />} />
       <Route path='/post/createpost' element={<CreatePost />} />
       <Route path='/calendar' element={<Calendar />} />
       <Route path='/ContentAnalysis' element={<ContentAnalysis />} />
       <Route path='/analysis' element={<Analysis />} />
-      <Route path='/dashboard/faq' element={<FAQ />} />
-      <Route path='/dashboard/helpdesk' element={<Helpdesk />} />
-      <Route path='/dashboard/feedback' element={<Feedback />} />
-      <Route path='/settings' element={<Settings />} />
+      <Route path='/faq' element={<FAQ />} />
+      <Route path='/helpdesk' element={<Helpdesk />} />
+      <Route path='/feedback' element={<Feedback />} />
       <Route path="/payment" element={<SubscriptionPage />} />    
+      <Route path="/settings" element={<Settings />} />    
     </Routes>
   );
 }

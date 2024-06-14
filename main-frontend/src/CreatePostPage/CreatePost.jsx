@@ -164,7 +164,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
     
         if (postType === 'now') {
           alert('Content successfully posted');
-          window.location = '/';
+          window.location = 'http://localhost:3000/post';
         } else {
           alert('Post is scheduled for: ' + scheduleTime);
           window.location.href = 'http://localhost:3000/calendar';
@@ -254,7 +254,7 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                       <p className="email">user@gmail.com</p>
                   </a>
                   <a href="edit-profile.html">Edit Profile</a>
-                  <a href="#" onClick={confirmLogout}>Log Out</a>
+                  <a href="http://localhost:3000/login" onClick={confirmLogout}>Log Out</a>
                   </div>
               </div>
           </div>
