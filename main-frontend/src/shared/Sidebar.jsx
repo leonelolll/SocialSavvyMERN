@@ -36,7 +36,7 @@ function Sidebar() {
                 <li ><Link to="/analysis" class={s.a}><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
                 <li><Link to="/ContentAnalysis" class={s.a}><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
                 <li><Link to="/payment" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
-                <li><Link to="/edit-profile" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
+                <li><Link to="/settings" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
             </ul>
             <hr />
             <ul className={s.logout}>
