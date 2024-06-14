@@ -334,7 +334,7 @@ nav{
   gap: 20px;
 }
 
-.post {
+.post-item {
     background-color: white;
     width: 340px;
     height: fit-content;

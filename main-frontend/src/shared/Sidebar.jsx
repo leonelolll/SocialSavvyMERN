@@ -35,7 +35,7 @@ function Sidebar() {
                 <li><Link to="http://localhost:3000/calendar" class={s.a}><img src={calendarsvg} alt="calendar" /><p>Calendar</p></Link></li>
                 <li ><Link to="http://localhost:3000/analysis" class={s.a}><img src={analysissvg} alt="analysis" /><p>Analytics</p></Link></li>
                 <li><Link to="http://localhost:3000/ContentAnalysis" class={s.a}><img src={framesvg} alt="viral content" /><p>Viral Content</p></Link></li>
-                <li><Link to="http://localhost:3000/payment.html" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
+                <li><Link to="http://localhost:3000/payment" class={s.a}><img src={paymentsvg} alt="payment" /><p>Subscription</p></Link></li>
                 <li><Link to="http://localhost:3000/edit-profile.html" class={s.a}><img src={settingssvg} alt="settings" /><p>Settings</p></Link></li>
             </ul>
             <hr />
