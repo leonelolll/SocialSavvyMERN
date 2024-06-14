@@ -13,6 +13,8 @@ import './createpost.css';
 import { BlobServiceClient } from '@azure/storage-blob';
 import UserPic from '../assets/images/user.png';
 import Media from '../assets/images/previewimage.jpg';
+import axios from 'axios';
+
 
 function CreatePost() {
   const [platforms, setPlatforms] = useState([]);
@@ -26,6 +28,15 @@ function CreatePost() {
   const [selectedPlatforms, setSelectedPlatforms] = useState([]); // State for selected platforms
   const [selectedDraft, setSelectedDraft] = useState("");
   const [file, setFile] = useState(null);
+  //const [text, setText] = useState('');
+  const [correctText, setCorrectText] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [showCorrectedText, setShowCorrectedText] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const [isCorrectedTextApplied, setIsCorrectedTextApplied] = useState(false);
+
+
 
   // Function to handle platform selection
   const handlePlatformChange = (selectedOptions) => {
@@ -170,6 +181,32 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
         window.location.href = 'login.html';
       }
     };
+
+    //const setText = (correctedText) => {
+      //setCaption(correctedText);
+    //};
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setError(null);
+      setShowCorrectedText(false);
+    
+      try {
+        const response = await axios.post('http://localhost:5000/chat', { text: caption });
+        const correctedText = response.data;
+        setCorrectText(correctedText);
+        setShowCorrectedText(true);
+        setIsCorrectedTextApplied(true);
+        //setText(correctedText);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+      setButtonVisible(false);
+
+    };
     
     return (
       <div>
@@ -280,7 +317,28 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
                 <fieldset>
                   <div>
                     <label htmlFor="input-caption" className="label-input-caption">Caption:</label><br />
-                    <textarea id="input-caption" title="input-caption" rows="5" value={caption} onChange={e => setCaption(e.target.value)} /><br />
+                    <textarea id="input-caption" title="input-caption" rows="5" 
+                    value={caption} onChange={e => setCaption(e.target.value)} />
+                    <button onClick={handleSubmit} disabled={isLoading} style={{ display: buttonVisible ? "block" : "none" }}>
+                    {/*spell checker*/}
+                    {isLoading ? 'Correcting...' : 'Correct Text'}
+                  </button>
+                  {error && <p style={{ color: 'red' }}>{error}</p>}
+                  {showCorrectedText && (
+                  <div className="corrected-text-container">
+                    <h5>Corrected Text:</h5>
+                    <p>{correctText}</p>
+                    <button
+                      onClick={() => {
+                        setCaption(correctText);
+                        setShowCorrectedText(false);
+                      }}
+                    >
+                      Apply Changes
+                    </button>
+                  </div>
+                )}
+                    <br />
                   </div>
                   <div>
                     <label htmlFor="add-media" className="label-add-media">Media</label><br />

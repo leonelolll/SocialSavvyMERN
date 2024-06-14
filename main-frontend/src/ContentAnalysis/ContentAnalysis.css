@@ -531,8 +531,8 @@ nav {
   
   .post{
       background-color: white;
-      max-width: 340px;
-      min-height: 500px;
+      max-width: 302px;
+      min-height: 480px;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
@@ -574,11 +574,14 @@ nav {
   .username  {
       margin-left: 5px; /* Remove default margin */
       display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .name .username {
       align-self: center;
       padding: 5px;
+      margin-right: 200px;
     }
   
   .view-button{

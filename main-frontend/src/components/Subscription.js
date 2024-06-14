@@ -32,8 +32,8 @@ function Subscription() {
           throw new Error(`Failed to fetch receipt details: ${response.status}`);
         }
         const data = await response.json();
-        setSelectedReceipt(data); // Update selectedReceipt with the fetched details
-        console.log('Fetched receipt details:', data); // Log fetched data
+        setSelectedReceipt(data); 
+        console.log('Fetched receipt details:', data); 
       } catch (error) {
         console.error('Error fetching receipt details:', error);
       }
@@ -58,20 +58,20 @@ function Subscription() {
     const receipt = await response.json();
     console.log('Fetched receipt details:', receipt);
     
-    // Ensure receipt details are valid
+    
     if (!receipt || typeof receipt !== 'object') {
       throw new Error('Invalid receipt data received');
     }
 
-    // Access receipt properties only if receipt data is valid
+   
     const { receiptNumber, date, amountPaid } = receipt;
 
-    // Create a temporary HTML element to render the receipt data
+    
     const receiptElement = document.createElement('div');
-    receiptElement.style.width = '210mm';  // A4 width
-    receiptElement.style.height = '297mm'; // A4 height
-    receiptElement.style.padding = '10mm'; // Padding for better readability
-    receiptElement.style.background = 'white'; // Background color for clarity
+    receiptElement.style.width = '210mm';  
+    receiptElement.style.height = '297mm'; 
+    receiptElement.style.padding = '10mm'; 
+    receiptElement.style.background = 'white'; 
     receiptElement.innerHTML = `
       <h1>Receipt #${receiptNumber}</h1>
       <p>Date: ${date}</p>
@@ -212,7 +212,7 @@ const handleUpdateClick = async () => {
       const response = await fetch('http://localhost:4000/cancel-subscription', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ customerEmail: 'sofea@gmail.com' }), // Ensure this is the correct email
+        body: JSON.stringify({ customerEmail: 'sofea@gmail.com' }), 
       });
 
       if (response.ok) {
